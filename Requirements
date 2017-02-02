@@ -7,9 +7,15 @@ Project Requirements
         
     Must be able to set remind for a specific time, i.e ignore priority system for a set event. 
     
+    Must have Calendar for choosing date of reminder
+    
+    Must have Time Picker for choosing specific time for reminder:
+        -Time picker isn't always necessary, only interactable if uses pokes "Specific time"
+        
     Must have two specific types of notifications:
         1. Remind must appear in the same way a text would. Short notification, sits in drawer until user interaction.
         2. Must be able to set "alert" in the style of alarm, rings until user touches it. 
+        
     Notifications in drawer have options for dealing with:
         1. Completed: The task is finished and doesn't need to be reminded of again. 
         2. Remind Me Later: Will remind again later based on the priority level.
