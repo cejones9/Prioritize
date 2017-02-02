@@ -26,8 +26,6 @@ Project Requirements
         Must have a “time due” feature.
         Must have a priority system per reminder.
         
-        
-        
     Alert the user about reminder through notification.
         Must have different “levels” of reminders, based on priority level
         
