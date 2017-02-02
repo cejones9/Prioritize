@@ -1,0 +1,54 @@
+Project Requirements 
+    Application must run on Android system.
+    Application will work without internet access. 
+    
+    Priority level must determine how soon the user gets a reminder. 
+        Algorithm must be set to determine the time between the "due date" and the initial remind. 
+        
+    Must be able to set remind for a specific time, i.e ignore priority system for a set event. 
+    
+    Must have two specific types of notifications:
+        1. Remind must appear in the same way a text would. Short notification, sits in drawer until user interaction.
+        2. Must be able to set "alert" in the style of alarm, rings until user touches it. 
+    Notifications in drawer have options for dealing with:
+        1. Completed: The task is finished and doesn't need to be reminded of again. 
+        2. Remind Me Later: Will remind again later based on the priority level.
+        3. Snooze: A shorter duration of Remind Me Later if user is busy at the immediate time. 
+        
+    Must have a reminder feature.
+        Reminders must be able to added and deleted 
+        Must have a “time due” feature.
+        Must have a priority system per reminder.
+        
+        
+        
+    Alert the user about reminder through notification.
+        Must have different “levels” of reminders, based on priority level
+        
+    Display the current reminders on home screen. 
+    
+    Must not take more than a minute to add a reminder.
+        Under 30 seconds would be preferable.
+        Would be a good idea to run a time analysis of this app versus other “calendar apps”, 
+          and statistically graph how much time is saved using our app than say, Google Calendars, etc.
+          
+    Must be easy to use
+        Perhaps a field test - invite people who have never used the app to try it out, if they have 
+          any kind of questions, fix them. If they can’t find something in app, fix it. Users should 
+          be able to easily grasp it without much effort.
+        
+    The application should automatically ask users if they want to be re-reminded of a past notification.
+    
+    Past notifications should go into a “history” queue.
+        Perhaps a max of 100 notifications? 128? 255?
+        
+    
+    Must implement a "time until next notification" clock / timer / countdown
+    
+    Implement some sort of a stopwatch / countdown timer
+    
+    Must be able to give alarms even if application is not open
+    
+    
+    
+    
