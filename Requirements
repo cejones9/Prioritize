@@ -1,10 +1,26 @@
 Project Requirements 
     Application must run on Android system.
     Application will work without internet access. 
+    
+    Priority level must determine how soon the user gets a reminder. 
+        Algorithm must be set to determine the time between the "due date" and the initial remind. 
+        
+    Must be able to set remind for a specific time, i.e ignore priority system for a set event. 
+    
+    Must have two specific types of notifications:
+        1. Remind must appear in the same way a text would. Short notification, sits in drawer until user interaction.
+        2. Must be able to set "alert" in the style of alarm, rings until user touches it. 
+    Notifications in drawer have options for dealing with:
+        1. Completed: The task is finished and doesn't need to be reminded of again. 
+        2. Remind Me Later: Will remind again later based on the priority level.
+        3. Snooze: A shorter duration of Remind Me Later if user is busy at the immediate time. 
+        
     Must have a reminder feature.
         Reminders must be able to added and deleted 
         Must have a “time due” feature.
         Must have a priority system per reminder.
+        
+        
         
     Alert the user about reminder through notification.
         Must have different “levels” of reminders, based on priority level
@@ -27,7 +43,7 @@ Project Requirements
         Perhaps a max of 100 notifications? 128? 255?
         
     
-    Must implement a "time until next notification" clock / timer
+    Must implement a "time until next notification" clock / timer / countdown
     
     Implement some sort of a stopwatch / countdown timer
     
