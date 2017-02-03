@@ -14,12 +14,20 @@ public class Reminder{
     */
     String description;
     String time_due; 
+    String date_due;
     /*
    Not sure how to represent time yet.
+   These likely have their own field, will keep as is.
+   Will keep in mind that idea of having an object/interface hold both of them.
+   Interface because we may want to have the time_due be null
     */
-    int priority;
+    double priority;
     /*
     Priority will be based on a percentage, so a number from 1-100.
+    This will be a double for the sake of having 1 less operation.\
+    For example .5 will more easily take time remaining into a half
+    EX: (3000 minutes)*(.5) = 1500 minutes.
+    Will give it a range of 0-1
     */
     boolean alarm; //will be true if alarm is wanted.
     boolean alert; // will be true if alert is wanted.
@@ -45,6 +53,7 @@ public class Reminder{
      * reminder.
      * @return - Will return the string entered
      */
+    
     public static String get_description(){
      
         
