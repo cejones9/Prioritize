@@ -1,5 +1,4 @@
-﻿I believe the best option here is the first and lazier one. Not because it’s lazy, but because it leaves an enormously smaller room for error. 
-
+***updateanother strategy is using a JSON implementation of each reminder edited or added to the database.. Would be similar to the ini implementation 
 
 -Two possible strategies for syncing with multiple devices with Google Drive space/authentication:
 1. Upload the sqlite database to the drive each time there’s a change. After testing sqlite data, i made a table with 3 columns, and made over 800 instances of it. That file is a whopping 44kb. I believe that this means that this is a sound strategy. We will just have to add a “saveDate” column for syncing so that the other devices know what files to look for after downloading the new instance of the database, so they can set alerts on that device.
