@@ -1,0 +1,43 @@
+﻿I believe the best option here is the first and lazier one. Not because it’s lazy, but because it leaves an enormously smaller room for error. 
+
+
+-Two possible strategies for syncing with multiple devices with Google Drive space/authentication:
+1. Upload the sqlite database to the drive each time there’s a change. After testing sqlite data, i made a table with 3 columns, and made over 800 instances of it. That file is a whopping 44kb. I believe that this means that this is a sound strategy. We will just have to add a “saveDate” column for syncing so that the other devices know what files to look for after downloading the new instance of the database, so they can set alerts on that device.
+2. Share .ini text representations of each reminder, only upload each reminder as it’s added/deleted/edited. Will require a parser to update local sqLite db.
+  Option 2 seems like the best bet, minimize data transfers. Or if we find that the db is negligibly small, then perhaps uploading and downloading it with each change isn’t crazy. 
+
+
+-Each entry of a reminder in the sqlite database needs to have the following columns:
+
+
+ini_ID - int (possible key, tells device what the associated .ini file is)
+Description - String (possible key, could also serve as name of .ini file)
+Priodity - Double
+dueMonth(s) - int (02=feb. 0102=jan. And feb., 0512=man and dec)
+dueDay(s)- int
+dueYear - int
+dueHour - int
+dueMinute- int
+Alarm - boolean
+alertMonth - int
+alerDay- int
+alerYear - int
+alerHour - int
+alertMinute- int
+numberOfDays- int  
+repeatEvery_Days - int (0-7)
+repeatEvery_Months - int (0-12)                                                     Restrictions may need to be set 
+repeatEvery_Weeks - int (0-52)
+
+
+.ini strategy:
+All of the information for each reminder pushed onto a .ini text tile, resembling the above formation. When syncing is initialized, that is when a new version of the folder being shared with multiple devices is pushed from Drive to the device
+        -Query for all files for modefiedDate>lastSyncDate
+        -Handle each file individually:
+1. If it’s a brand new reminder, insert into DB, set alertDate on device.
+2. It edited reminder, update old information. No need to find which is old or new, just update the whole tuple. Change alertdate/time on device if necessary. 
+A parser must be created for reading in .ini information, and setting .ini information. 
+When saving a .ini file, we have two choices:
+1. Let the description serve as the title of the file. This will disallow the user from making reminders of the same description.
+2. Find a numbered key value not in use by the drive folder already, connect that key value with the reminder description in the sqlite database.
+Option 2 seems like the best bet, holds less restrictions.
