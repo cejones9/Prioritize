@@ -97,16 +97,26 @@ public class addReminder extends AppCompatActivity {
         int dayCount = 0;
         int currentMonth = cal.get(Calendar.MONTH) + 1;
         int currentDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+        
+        
 
-
-        if (month > currentMonth) {
+        while(month!= currentMonth){
+            dayCount += daysInMonth(currentMonth);
+            if (currentMonth == 12)
+                currentMonth = 1;
+            else
+                currentMonth+=1;
+            
+        }
+      /*  if (month > currentMonth) {
 
             while (month > currentMonth) {
                 dayCount += daysInMonth(currentMonth);
                 currentMonth++;
             }
             //  must add 1 to Calendar.MONTH
-        }
+        }*/
+        
         if (day > currentDayOfMonth) {
             while (day > currentDayOfMonth) {
                 dayCount += 1;
