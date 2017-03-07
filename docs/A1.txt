@@ -1,0 +1,12 @@
+{
+	"RID" : ____,
+	"Description" : _____,
+	"Due DAte" : _____,
+	"Due Time" : _____,
+	"Calculated Reminder Date" : _____,
+	"Calculated Reminder Time" : _____,
+	"Priority Value" : _____,
+	"Alarm" : _____,
+	"onTime" : ______,
+	"Repeatable" : ______,
+}
