@@ -6,11 +6,10 @@ Prioritize will utilize the Google Drive API, which will allow syncing of files 
 Prioritize requires an Android Device. Specific API number isn't decided yet, but the current aim for the minimum API level is 20 or 21.
 
 
-
 Contributors: 
-Joel Wilhelm (Documentation, Text to JSON, JSON to text algorithm)
+Joel Wilhelm (Documentation, Text to JSON, JSON to text algorithm / SQLite Database)
 Shahrukh (GUI)
 Wajahat (Time Picker / Reminder)
-Cody Jones (Priority Algorithm, Google Drive API)
+Cody Jones (Priority Algorithm, Google Drive API / SQLite Database)
 
 
