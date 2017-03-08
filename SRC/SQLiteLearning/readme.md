@@ -1,1 +1,3 @@
-This i
+This project creates a SQLite Database of a single table called a Reminder, containing all of the columns that are needed by the app. When I have time (probably tomorrow, 3/8/2017) I will this all over to the build with the GUI, along with the queries that the app will be using for displaying each individual reminder in the home page in its own segment on the page.  
+
+The main activity creates the database, which is defined in the FeedReadercontract and FeedReaderDbHelper classes. It also adds 2 entries into the database and a sample query is created to demonstrate the use of Cursors for sampling the query resultes. 
