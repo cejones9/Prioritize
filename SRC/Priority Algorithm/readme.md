@@ -1,1 +1,2 @@
-Ths code has a specific purpose and can be most easily demonstrated in NetBeans. It's easier to fix bugs and optimize when we can simply call System.out.println() to test dates and priority values. It will be copied over to the Android build when we figure out the best way to wake up te device and trigger a notification. That call needs to be done in each of the if statements at the moment. This can and wil be optimized in the future.
+This code will return a value for month, day of month, year, hour, and minute, for which a Reminder should be set to notificaion.
+
