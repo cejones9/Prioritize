@@ -51,7 +51,10 @@ public class JSONTester{
                 + "\"Repeatable\"" + ":" + this.Repeatable + ","
                 + "}");
         
-                
+                /*
+                String insertIntoSQLite = "INSERT into Reminder (" +this.RID+", " 
+                   + this.Description + ", " + ....
+                */
         
         
         
