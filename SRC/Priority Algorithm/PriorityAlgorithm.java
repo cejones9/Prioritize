@@ -423,48 +423,134 @@ public class PriorityAlgorithm {
                 if (priority >= 8) {
                     //set alert for  5 hours later
                 }
-                if (priority >= 5) {
+                else if (priority >= 5) {
                     //set alert for 6 hours later
                 }
-                if (priority < 5) {
+                else (priority < 5) {
                     //set alert for 5 hours later
 
                 }
             }
 
             if (hoursUntil <= 12) {
-                // make some decisions
-
-            }
+                if (priority >= 8) {
+                   // four hours later
+                }
+                else if (priority >= 5) {
+                    //set alert for 6 hours later
+                }
+                else (priority < 5) {
+                    //set alert for 8 hours later
+                }
+       
         }
-        if (daysUntil <= 5) {
-
-        }
-
-        if (daysUntil <= 7) {
-
-        }
-
-        if (daysUntil <= 14) {
-
-        }
-
-        if (daysUntil <= 28) {
-
-        }
-
-        if (daysUntil <= 56) {
-
-        }
-
-        if (daysUntil <= 84) {
+       else if (daysUntil <= 5) {
+             if (priority >= 8) {
+                    //1.5 day later
+                }
+                else if (priority >= 5) {
+                    //3 days
+                }
+                else (priority < 5) {
+                   //4 days
+            
+            
 
         }
+        }
+       else if (daysUntil <= 7) {
+            if (priority >= 8) {
+                   //3 days
+                }
+                else if (priority >= 5) {
+                    //5 days later
+                }
+                else (priority < 5) {
+                   //6 days later
+                }
+        }
 
-        if (daysUntil > 84) {
+       else if (daysUntil <= 14) {
+            if (priority >= 8) {
+                   //80%
+                }
+                else if (priority >= 5) {
+                   //50%
+                }
+                else (priority < 5) {
+                  //30%
+                }
+        }
 
+        else if (daysUntil <= 28) {
+             if (priority >= 8) {
+                   //70%
+                }
+                else if (priority >= 5) {
+                    //50%
+                }
+                else (priority < 5) {
+                    //20%
+                }
+        }
+       else if (daysUntil <= 56) {
+             if (priority >= 8) {
+                    //80%
+                }
+                else if (priority >= 5) {
+                    //50%
+                }
+                else (priority < 5) {
+                    //30%
+                }
+        }
+
+        else if (daysUntil <= 84) {
+            if (priority >= 8) {
+                    //60%$
+                }
+                else if (priority >= 5) {
+                    //40%
+                }
+                else (priority < 5) {
+                    //20%
+                }
+        }
+
+        else (daysUntil > 84) {
+            if (priority >= 8) {
+                    //50%
+                }
+                else if (priority >= 5) {
+                    //35%
+                }
+                else (priority < 5) {
+                    //15%
+                }
         }
 
         return true;
+
+    
     }
+        
+        public String Days_Until_into_Date(int days){
+         String date;
+            //do stuff
+            
+            
+            
+            
+            
+            
+         return date;   
+        }
+        
+        
+        
+        
+        
 }
+
+
+
