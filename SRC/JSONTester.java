@@ -23,7 +23,7 @@ public class JSONTester{
         
         //public String that represents the JSON representation
         public String JSONString;
-        
+        public String insertIntoSQLite;
         
        //call the variables 
         
@@ -51,6 +51,11 @@ public class JSONTester{
                 + "\"Repeatable\"" + ":" + this.Repeatable + ","
                 + "}");
         
+            
+            insertIntoSQLite = ("INSERT into Reminder (" + this.RID + ", " + this.Description + ", " 
+            + this.Due_date + ", " + this.Due_time + ", " + this.C_Remind_Date + ", " + this.C_Remind_Time + 
+            ", " + this.Priority_Val + ", " + this.Alarm.toString() + ", " + this.On_Time.toString() + ", " + this.Repeatable + ")");
+            
                 /*
                 String insertIntoSQLite = "INSERT into Reminder (" +this.RID+", " 
                    + this.Description + ", " + ....
