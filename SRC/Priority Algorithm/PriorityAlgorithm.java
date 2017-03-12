@@ -147,6 +147,7 @@ public class PriorityAlgorithm {
                 dayCount += daysInMonth(currentMonth);
                 if (currentMonth == 12) {
                     currentMonth = 1;
+                    currentYear += 1;
                 } else {
                     currentMonth += 1;
                 }
@@ -209,6 +210,7 @@ public class PriorityAlgorithm {
                 dayCount += daysInMonth(currentMonth);
                 if (currentMonth == 12) {
                     currentMonth = 1;
+                    currentYear +=1;
                 } else {
                     currentMonth += 1;
                 }
@@ -273,7 +275,7 @@ public class PriorityAlgorithm {
                 }
                     
             }
-            if (cal.get(Calendar.HOUR_OF_DAY)<12){
+            else if (cal.get(Calendar.HOUR_OF_DAY)<12){
                 if (priority<5){
                     
                 }
@@ -281,7 +283,7 @@ public class PriorityAlgorithm {
                     
                 }
             }
-            if (cal.get(Calendar.HOUR_OF_DAY)<15){
+            else if (cal.get(Calendar.HOUR_OF_DAY)<15){
                 if (priority<5){
                     
                 }
@@ -289,7 +291,7 @@ public class PriorityAlgorithm {
                     
                 }
             }
-            if (cal.get(Calendar.HOUR_OF_DAY)<20){
+            else if (cal.get(Calendar.HOUR_OF_DAY)<20){
                 if (priority<5){
                     
                 }
@@ -297,7 +299,7 @@ public class PriorityAlgorithm {
                     
                 }
             }
-            if (cal.get(Calendar.HOUR_OF_DAY)<24){
+            else if (cal.get(Calendar.HOUR_OF_DAY)<24){
                 if (priority<5){
                     
                 }
@@ -426,7 +428,7 @@ public class PriorityAlgorithm {
                 else if (priority >= 5) {
                     //set alert for 6 hours later
                 }
-                else (priority < 5) {
+                else if(priority < 5) {
                     //set alert for 5 hours later
 
                 }
@@ -439,7 +441,7 @@ public class PriorityAlgorithm {
                 else if (priority >= 5) {
                     //set alert for 6 hours later
                 }
-                else (priority < 5) {
+                else if(priority < 5) {
                     //set alert for 8 hours later
                 }
        
@@ -451,7 +453,7 @@ public class PriorityAlgorithm {
                 else if (priority >= 5) {
                     //3 days
                 }
-                else (priority < 5) {
+                else if(priority < 5) {
                    //4 days
             
             
@@ -465,7 +467,7 @@ public class PriorityAlgorithm {
                 else if (priority >= 5) {
                     //5 days later
                 }
-                else (priority < 5) {
+                else if(priority < 5) {
                    //6 days later
                 }
         }
@@ -477,7 +479,7 @@ public class PriorityAlgorithm {
                 else if (priority >= 5) {
                    //50%
                 }
-                else (priority < 5) {
+                else if(priority < 5) {
                   //30%
                 }
         }
@@ -489,7 +491,7 @@ public class PriorityAlgorithm {
                 else if (priority >= 5) {
                     //50%
                 }
-                else (priority < 5) {
+                else if(priority < 5) {
                     //20%
                 }
         }
@@ -500,7 +502,7 @@ public class PriorityAlgorithm {
                 else if (priority >= 5) {
                     //50%
                 }
-                else (priority < 5) {
+                else if(priority < 5) {
                     //30%
                 }
         }
@@ -512,19 +514,19 @@ public class PriorityAlgorithm {
                 else if (priority >= 5) {
                     //40%
                 }
-                else (priority < 5) {
+                else if(priority < 5) {
                     //20%
                 }
         }
 
-        else (daysUntil > 84) {
+        else if(daysUntil > 84) {
             if (priority >= 8) {
                     //50%
                 }
                 else if (priority >= 5) {
                     //35%
                 }
-                else (priority < 5) {
+                else if(priority < 5) {
                     //15%
                 }
         }
@@ -551,6 +553,5 @@ public class PriorityAlgorithm {
         
         
 }
-
 
 
