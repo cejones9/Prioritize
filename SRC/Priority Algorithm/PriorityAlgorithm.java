@@ -316,37 +316,35 @@ public class PriorityAlgorithm {
         may be more useful to simply multiply the priority percentage by 24 
         in a way that produces reasonable times for the 10 values.
         */
-        if (daysUntil[0] == 1){
-            if (priority == 1){
+        switch (daysUntil[0]){
+            
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+                        
+                       
+                        
+            
+           
                 
-            }
-            if (priority == 2){
-                
-            }
-            if (priority == 3){
-                
-            }
-            if (priority == 4){
-                
-            }
-            if (priority == 5){
-                
-            }
-            if (priority == 6){
-                
-            }
-            if (priority == 7){
-                
-            }
-            if (priority == 8){
-                
-            }
-            if (priority == 9){
-                
-            }
-            if (priority == 10){
-                
-            }
+            
             
             
             
@@ -357,31 +355,31 @@ public class PriorityAlgorithm {
             
         }
         
-        if (daysUntil[0] <= 5) {
+        else if ( 3 < daysUntil[0] && daysUntil[0] <= 5) {
 
         }
 
-        if (daysUntil[0] <= 7) {
+        else if (5 < daysUntil[0] &&daysUntil[0] <= 7) {
 
         }
 
-        if (daysUntil[0] <= 14) {
+        else if (7 < daysUntil[0] &&daysUntil[0] <= 14) {
 
         }
 
-        if (daysUntil[0] <= 28) {
+        else if (14 < daysUntil[0] &&daysUntil[0] <= 28) {
 
         }
 
-        if (daysUntil[0] <= 56) {
+        else if (28 < daysUntil[0] &&daysUntil[0] <= 56) {
 
         }
 
-        if (daysUntil[0] <= 84) {
+        else if (56 < daysUntil[0] &&daysUntil[0] <= 84) {
 
         }
 
-        if (daysUntil[0] > 84) {
+        else if (daysUntil[0] > 84) {
 
         }
         
@@ -433,8 +431,9 @@ public class PriorityAlgorithm {
 
                 }
             }
+        }
 
-            if (hoursUntil <= 12) {
+           else if (hoursUntil <= 12) {
                 if (priority >= 8) {
                    // four hours later
                 }
@@ -535,7 +534,7 @@ public class PriorityAlgorithm {
 
     
     }
-        
+    
         public String Days_Until_into_Date(int days){
          String date;
             //do stuff
