@@ -23,7 +23,8 @@ public class PriorityAlgorithm {
         SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyy");
         String formattedDate = df.format(c.getTime());
         int i = c.get(Calendar.HOUR_OF_DAY);
-        System.out.println(daysUntilReminder(3, 9, 2017)[2]);
+        System.out.println(daysUntilReminder(3, 9, 2018)[0]);
+        System.out.println(daysToDate(3, 0, 0));
         String a = "12345";
         System.out.println(a.charAt(3));
         
@@ -534,23 +535,69 @@ public class PriorityAlgorithm {
 
     
     }
-    
-        public String Days_Until_into_Date(int days){
-         String date;
-            //do stuff
+    public static String daysToDate(int days, int hours, int minutes){
+        Calendar cal = Calendar.getInstance();
+        int currentMonth = cal.get(Calendar.MONTH) + 1;
+        int currentDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+        int currentYear = cal.get(Calendar.YEAR);
+        int currentHour = cal.get(Calendar.HOUR_OF_DAY);
+        int currentMinute = cal.get(Calendar.MINUTE);
+        while(days>=364){
+            if(isLeapYear(currentYear)==false){
+                currentYear+=1;
+                days-=364;
+            }
+            if(isLeapYear(currentYear)==true){
+                if(days>=365){
+                    currentYear+=1;
+                    days-=365;
+                }
+                
+                else
+                    break;
+            }
             
+        }
+        while(days>=daysInMonth(currentMonth)){
+            days-=daysInMonth(currentMonth);
+            if (currentMonth==12){
+                currentMonth=1;
+            }
+            else
+                currentMonth+=1;
+        }
+        while(days!=0){
+            currentDayOfMonth+=1;
+            days-=1;
+        }
+        while(hours!=0){
+            currentHour +=1;
+            hours-=1;
             
+        }
+        while(minutes!=0){
+            currentMinute +=1;
+            minutes-=1;
             
-            
-            
-            
-         return date;   
         }
         
+        String alertDateTime = Integer.toString(currentMonth)+Integer.toString(currentDayOfMonth)+
+                Integer.toString(currentYear)+Integer.toString(currentHour)+
+                Integer.toString(currentMinute);
+        
+        return alertDateTime;
         
         
         
         
+        
+    }
+    public static boolean isLeapYear(int year){
+        if (year == 2020||year==2024||year==2028||year==2032||year==2036||year==2040)
+            return true;
+        else
+            return false;
+    }
 }
 
 
