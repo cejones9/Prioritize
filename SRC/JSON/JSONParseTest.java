@@ -1,4 +1,4 @@
-public class JSON{
+public class JSONParseTest{
 
         private String RID;
         private String Description;
