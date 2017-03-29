@@ -8,7 +8,7 @@ Prioritize requires an Android Device. Specific API number isn't decided yet, bu
 
 
 Contributors: 
-Joel Wilhelm (Documentation, Text to JSON, JSON to text algorithm / SQLite Database)
+Joel Wilhelm (Documentation, JSON implementation and parser, Priority algorithm)
 Shahrukh (GUI)
 Wajahat (Notifications)
 Cody Jones (Priority Algorithm, Google Drive API / SQLite Database)
