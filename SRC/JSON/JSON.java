@@ -13,8 +13,8 @@ public class JSON{
         private String C_Remind_Date;
         private String C_Remind_time;
         private String Priority_Val;
-        private Boolean Alarm;
-        private Boolean On_Time;
+        private int Alarm;
+        private int On_Time;
         private int Repeatable;
 
 
@@ -44,8 +44,8 @@ public class JSON{
                     + "\"C_Remind_Date\"" + ":" + this.C_Remind_Date + ","
                     + "\"C_Remind_Time\"" + ":" + this.C_Remind_time + ","
                     + "\"Priority_Val\"" + ":"+ this.Priority_Val + ","
-                    + "\"Alarm\"" + ":" + this.Alarm.toString() + ","
-                    + "\"On_Time\"" + ":" + this.On_Time.toString() + ","
+                    + "\"Alarm\"" + ":" + this.Alarm + ","
+                    + "\"On_Time\"" + ":" + this.On_Time + ","
                     + "\"Repeatable\"" + ":" + this.Repeatable + ","
                     + "}");
 
@@ -65,7 +65,7 @@ public class JSON{
         }
         
         public JSON(String RID, String Description, String datepicked, String timepicked, String calcdate, String calcTime, 
-                String priorityval, boolean alarm, boolean ontime, int repeat){
+                String priorityval, int alarm, int ontime, int repeat){
             this.Alarm = alarm;
             this.C_Remind_Date = calcdate;
             this.C_Remind_time = calcTime;
@@ -79,13 +79,13 @@ public class JSON{
         }
         
         public JSON(int i){
-            this.Alarm = null;
+            this.Alarm = 0;
             this.C_Remind_Date = null;
             this.C_Remind_time = null;
             this.Description = null;
             this.Due_Date = null;
             this.Due_Time = null;
-            this.On_Time = null;
+            this.On_Time = 0;
             this.Priority_Val = null;
             this.RID = null;
             this.Repeatable = i;
@@ -135,20 +135,20 @@ public class JSON{
                 JSONstring = JSONstring.substring(alarmColon+1);
                 int alarmComma = JSONstring.indexOf(",");
                 
-                if (JSONstring.substring(0, alarmComma).equalsIgnoreCase("True")){
-                    new_JSON.Alarm = true;
+                if (JSONstring.substring(0, alarmComma).equalsIgnoreCase("1")){
+                    new_JSON.Alarm = 1;
                 } else{
-                    new_JSON.Alarm = false;
+                    new_JSON.Alarm = 0;
                 }
                 
                 int on_TimeColon = JSONstring.indexOf(":");
                 JSONstring = JSONstring.substring(on_TimeColon+1);
                 int on_TimeComma = JSONstring.indexOf(",");
                 
-                if(JSONstring.substring(0, on_TimeComma).equalsIgnoreCase("true")){
-                    new_JSON.On_Time = true;
+                if(JSONstring.substring(0, on_TimeComma).equalsIgnoreCase("1")){
+                    new_JSON.On_Time = 1;
                 }else{
-                    new_JSON.On_Time = false;
+                    new_JSON.On_Time = 0;
                 }
                 
                 int repeatColon = JSONstring.indexOf(":");
@@ -245,12 +245,14 @@ public class JSON{
         a.Priority_Val = get_Priority_Val();
     }
 
-    public static boolean get_Alarm(){
+    public static int get_Alarm(){
         //will get the value of alarm
-        boolean alarm_Type = false;
+        int alarm_Type;
         if (newAlarm_Information.alarm_Type.isChecked() == true) {
-            return alarm_Type = true;
-        } else
+            alarm_Type = 1;
+        } else{
+            alarm_Type=0;}
+        
         return alarm_Type;
     }
 
@@ -259,12 +261,14 @@ public class JSON{
 
     }
 
-    public static boolean get_On_Time(){
+    public static int get_On_Time(){
         //will get the value of On_time
-        boolean on_Time = false;
+        int on_Time;
         if (newAlarm_Information.on_Time.isChecked() == true) {
-            return on_Time = true;
-        } else
+             on_Time = 1;
+        } else{
+            on_Time = 0;
+        }
             return on_Time;
     }
 
