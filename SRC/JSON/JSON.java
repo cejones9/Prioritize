@@ -170,70 +170,70 @@ public class JSON{
         }
 
 
-    public static String get_RID(){
+    public  String get_RID(){
         //will get the value of RID
         return null;
     }
 
-    private static void set_RID(JSON a){
+    private  void set_RID(JSON a){
         a.RID = get_RID();
 
     }
 
-    public static String get_Description(){
+    public  String get_Description(){
 
         //will get the value of description
         String description = newAlarm_Information.alarm_Description.getText().toString();
         return description;
     }
 
-    private static void set_Description(JSON a){
+    private  void set_Description(JSON a){
         a.Description = get_Description();
 
     }
-    public static String get_Due_Date(){
+    public  String get_Due_Date(){
 
         //will get the value of Due Date
         String due_Date = newAlarm_Information.date_Picked();
         return due_Date;
     }
 
-    private static void set_Due_Date(JSON a){
+    private  void set_Due_Date(JSON a){
         a.Due_Date = get_Due_Date();
 
     }
 
-    public static String get_Due_Time(){
+    public  String get_Due_Time(){
 
         //will get the value of Due Time
         String due_Time = newAlarm_Information.time_Picked();
         return due_Time;
     }
 
-    private static void set_Due_Time(JSON a){
+    private  void set_Due_Time(JSON a){
         a.Due_Time = get_Due_Time();
 
     }
-    public static String get_C_Remind_Date(){
+    public  String get_C_Remind_Date(){
         //will get the value of Calculated Remind Date
         return null;
     }
 
-    private static void set_C_Remind_Date(JSON a){
+    private  void set_C_Remind_Date(JSON a){
         a.C_Remind_Date = get_C_Remind_Date();
 
     }
-    public static String get_C_Remind_Time(){
+    public  String get_C_Remind_Time(){
         //will get the value of calculated Remind Time
         return null;
     }
 
-    private static void set_C_Remind_Time(JSON a){
+    private  void set_C_Remind_Time(JSON a){
         a.C_Remind_time = get_C_Remind_Time();
 
     }
 
-    public static String get_Priority_Val(){
+    public  String get_Priority_Val(){
 
         //will get the value of priority value
         int priority_Val = newAlarm_Information.priority_Value;
@@ -241,11 +241,11 @@ public class JSON{
         return p_Val;
     }
 
-    private static void set_Priority_Val(JSON a){
+    private  void set_Priority_Val(JSON a){
         a.Priority_Val = get_Priority_Val();
     }
 
-    public static int get_Alarm(){
+    public  int get_Alarm(){
         //will get the value of alarm
         int alarm_Type;
         if (newAlarm_Information.alarm_Type.isChecked() == true) {
@@ -256,12 +256,12 @@ public class JSON{
         return alarm_Type;
     }
 
-    private static void set_Alarm(JSON a){
+    private  void set_Alarm(JSON a){
         a.Alarm = get_Alarm();
 
     }
 
-    public static int get_On_Time(){
+    public  int get_On_Time(){
         //will get the value of On_time
         int on_Time;
         if (newAlarm_Information.on_Time.isChecked() == true) {
@@ -272,17 +272,17 @@ public class JSON{
             return on_Time;
     }
 
-    private static void set_On_Time(JSON a){
+    private  void set_On_Time(JSON a){
         a.On_Time = get_On_Time();
 
     }
 
-    public static int get_Repeatable(){
+    public  int get_Repeatable(){
         //will get the value of description
         return 0;
     }
 
-    private static void set_Repeatable(JSON a){
+    private  void set_Repeatable(JSON a){
         a.Repeatable = get_Repeatable();
 
     }
