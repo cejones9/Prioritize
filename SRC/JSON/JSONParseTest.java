@@ -7,8 +7,8 @@ public class JSONParseTest{
         private String C_Remind_Date;
         private String C_Remind_time;
         private String Priority_Val;
-        private Boolean Alarm;
-        private Boolean On_Time;
+        private int Alarm;
+        private int On_Time;
         private int Repeatable;
 
 
@@ -20,10 +20,10 @@ public class JSONParseTest{
         //call the variables
         
         public static void main(String[] args) {
-            JSON newone = new JSON();
+            JSONParseTest newone = new JSONParseTest();
             System.out.println(newone.JSONString);
             
-            JSON test = JSON.convert_from_string_to_Object(newone.JSONString);
+            JSONParseTest test = JSONParseTest.convert_from_string_to_Object(newone.JSONString);
             System.out.println(test.RID);
             System.out.println(test.Due_Date);
             System.out.println(test.Due_Time);
@@ -38,7 +38,7 @@ public class JSONParseTest{
             
 }
 
-        public JSON(){
+        public JSONParseTest(){
             set_RID(this);
             set_Description(this);
             set_Due_Date(this);
@@ -57,11 +57,10 @@ public class JSONParseTest{
                     + "\"C_Remind_Date\"" + ":" + this.C_Remind_Date + ","
                     + "\"C_Remind_Time\"" + ":" + this.C_Remind_time + ","
                     + "\"Priority_Val\"" + ":"+ this.Priority_Val + ","
-                    + "\"Alarm\"" + ":" + this.Alarm.toString() + ","
-                    + "\"On_Time\"" + ":" + this.On_Time.toString() + ","
+                    + "\"Alarm\"" + ":" + this.Alarm + ","
+                    + "\"On_Time\"" + ":" + this.On_Time + ","
                     + "\"Repeatable\"" + ":" + this.Repeatable + ","
                     + "}");
-
 
            /* insertIntoSQLite = ("INSERT into Reminder (" + this.RID + ", " + this.Description + ", "
                     + this.Due_date + ", " + this.Due_time + ", " + this.C_Remind_Date + ", " + this.C_Remind_Time +
@@ -77,15 +76,15 @@ public class JSONParseTest{
 
         }
         
-        public static JSON convert_from_string_to_Object(String JSONstring){
-            JSON new_JSON = new JSON();
-            new_JSON.Alarm = null;
+        public static JSONParseTest convert_from_string_to_Object(String JSONstring){
+            JSONParseTest new_JSON = new JSONParseTest();
+            new_JSON.Alarm = 5;
             new_JSON.C_Remind_Date = null;
             new_JSON.C_Remind_time = null;
             new_JSON.Description = null;
             new_JSON.Due_Date = null;
             new_JSON.Due_Time = null;
-            new_JSON.On_Time = null;
+            new_JSON.On_Time = 5;
             new_JSON.Priority_Val = null;
             new_JSON.RID = null;
             new_JSON.Repeatable = 111;
@@ -130,20 +129,20 @@ public class JSONParseTest{
                 JSONstring = JSONstring.substring(alarmColon+1);
                 int alarmComma = JSONstring.indexOf(",");
                 
-                if (JSONstring.substring(0, alarmComma).equalsIgnoreCase("True")){
-                    new_JSON.Alarm = true;
+                if (JSONstring.substring(0, alarmComma).equalsIgnoreCase("1")){
+                    new_JSON.Alarm = 1;
                 } else{
-                    new_JSON.Alarm = false;
+                    new_JSON.Alarm = 0;
                 }
                 
                 int on_TimeColon = JSONstring.indexOf(":");
                 JSONstring = JSONstring.substring(on_TimeColon+1);
                 int on_TimeComma = JSONstring.indexOf(",");
                 
-                if(JSONstring.substring(0, on_TimeComma).equalsIgnoreCase("true")){
-                    new_JSON.On_Time = true;
+                if(JSONstring.substring(0, on_TimeComma).equalsIgnoreCase("1")){
+                    new_JSON.On_Time = 1;
                 }else{
-                    new_JSON.On_Time = false;
+                    new_JSON.On_Time = 0;
                 }
                 
                 int repeatColon = JSONstring.indexOf(":");
@@ -169,7 +168,7 @@ public class JSONParseTest{
         return "0123456789";
     }
 
-    private static void set_RID(JSON a){
+    private static void set_RID(JSONParseTest a){
         a.RID = get_RID();
 
     }
@@ -180,7 +179,7 @@ public class JSONParseTest{
        return "Testing the JSON.";
     }
 
-    private static void set_Description(JSON a){
+    private static void set_Description(JSONParseTest a){
         a.Description = get_Description();
 
     }
@@ -190,7 +189,7 @@ public class JSONParseTest{
        return "Monday";
     }
 
-    private static void set_Due_Date(JSON a){
+    private static void set_Due_Date(JSONParseTest a){
         a.Due_Date = get_Due_Date();
 
     }
@@ -202,7 +201,7 @@ public class JSONParseTest{
         return "12 PM";
     }
 
-    private static void set_Due_Time(JSON a){
+    private static void set_Due_Time(JSONParseTest a){
         a.Due_Time = get_Due_Time();
 
     }
@@ -211,7 +210,7 @@ public class JSONParseTest{
         return "Tuesday";
     }
 
-    private static void set_C_Remind_Date(JSON a){
+    private static void set_C_Remind_Date(JSONParseTest a){
         a.C_Remind_Date = get_C_Remind_Date();
 
     }
@@ -220,7 +219,7 @@ public class JSONParseTest{
         return "10 PM";
     }
 
-    private static void set_C_Remind_Time(JSON a){
+    private static void set_C_Remind_Time(JSONParseTest a){
         a.C_Remind_time = get_C_Remind_Time();
 
     }
@@ -234,7 +233,7 @@ public class JSONParseTest{
         return "5";
     }
 
-    private static void set_Priority_Val(JSON a){
+    private static void set_Priority_Val(JSONParseTest a){
         a.Priority_Val = get_Priority_Val();
     }
 
@@ -248,8 +247,8 @@ public class JSONParseTest{
         return true;
     }
 
-    private static void set_Alarm(JSON a){
-        a.Alarm = get_Alarm();
+    private static void set_Alarm(JSONParseTest a){
+        a.Alarm = 1;
 
     }
 
@@ -263,8 +262,8 @@ public class JSONParseTest{
         return true;
     }
 
-    private static void set_On_Time(JSON a){
-        a.On_Time = get_On_Time();
+    private static void set_On_Time(JSONParseTest a){
+        a.On_Time = 1;
         
 
     }
@@ -274,7 +273,7 @@ public class JSONParseTest{
         return 0;
     }
 
-    private static void set_Repeatable(JSON a){
+    private static void set_Repeatable(JSONParseTest a){
         a.Repeatable = get_Repeatable();
 
     }
