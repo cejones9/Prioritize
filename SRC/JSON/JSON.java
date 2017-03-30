@@ -64,6 +64,20 @@ public class JSON{
 
         }
         
+        public JSON(String RID, String Description, String datepicked, String timepicked, String calcdate, String calcTime, 
+                String priorityval, boolean alarm, boolean ontime, int repeat){
+            this.Alarm = alarm;
+            this.C_Remind_Date = calcdate;
+            this.C_Remind_time = calcTime;
+            this.Description = Description;
+            this.Due_Date = datepicked;
+            this.Due_Time = timepicked;
+            this.On_Time = ontime;
+            this.Priority_Val = priorityval;
+            this.RID = RID;
+            this.Repeatable = repeat;
+        }
+        
         public JSON(int i){
             this.Alarm = null;
             this.C_Remind_Date = null;
