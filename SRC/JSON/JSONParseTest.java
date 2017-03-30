@@ -24,6 +24,7 @@ public class JSONParseTest{
             System.out.println(newone.JSONString);
             
             JSONParseTest test = JSONParseTest.convert_from_string_to_Object(newone.JSONString);
+            
             System.out.println(test.RID);
             System.out.println(test.Due_Date);
             System.out.println(test.Due_Time);
@@ -32,7 +33,7 @@ public class JSONParseTest{
             System.out.println(test.Priority_Val);
             System.out.println(test.Alarm);
             System.out.println(test.On_Time);
-           System.out.println(test.Repeatable);
+            System.out.println(test.Repeatable);
             
             
             
@@ -163,68 +164,68 @@ public class JSONParseTest{
             
         }
         
-         public static String get_RID(){
+         public String get_RID(){
         //will get the value of RID
         return "0123456789";
     }
 
-    private static void set_RID(JSONParseTest a){
+    private void set_RID(JSONParseTest a){
         a.RID = get_RID();
 
     }
 
-    public static String get_Description(){
+    public String get_Description(){
 
         //will get the value of description
        return "Testing the JSON.";
     }
 
-    private static void set_Description(JSONParseTest a){
+    private void set_Description(JSONParseTest a){
         a.Description = get_Description();
 
     }
-    public static String get_Due_Date(){
+    public String get_Due_Date(){
 
         //will get the value of Due Date
        return "Monday";
     }
 
-    private static void set_Due_Date(JSONParseTest a){
+    private void set_Due_Date(JSONParseTest a){
         a.Due_Date = get_Due_Date();
 
     }
 
-    public static String get_Due_Time(){
+    public String get_Due_Time(){
 
         //will get the value of Due Time
         
         return "12 PM";
     }
 
-    private static void set_Due_Time(JSONParseTest a){
+    private void set_Due_Time(JSONParseTest a){
         a.Due_Time = get_Due_Time();
 
     }
-    public static String get_C_Remind_Date(){
+    public String get_C_Remind_Date(){
         //will get the value of Calculated Remind Date
         return "Tuesday";
     }
 
-    private static void set_C_Remind_Date(JSONParseTest a){
+    private void set_C_Remind_Date(JSONParseTest a){
         a.C_Remind_Date = get_C_Remind_Date();
 
     }
-    public static String get_C_Remind_Time(){
+    public String get_C_Remind_Time(){
         //will get the value of calculated Remind Time
         return "10 PM";
     }
 
-    private static void set_C_Remind_Time(JSONParseTest a){
+    private void set_C_Remind_Time(JSONParseTest a){
         a.C_Remind_time = get_C_Remind_Time();
 
     }
 
-    public static String get_Priority_Val(){
+    public String get_Priority_Val(){
 
         //will get the value of priority value
 //        int priority_Val = newAlarm_Information.priority_Value;
@@ -233,11 +234,11 @@ public class JSONParseTest{
         return "5";
     }
 
-    private static void set_Priority_Val(JSONParseTest a){
+    private void set_Priority_Val(JSONParseTest a){
         a.Priority_Val = get_Priority_Val();
     }
 
-    public static boolean get_Alarm(){
+    public boolean get_Alarm(){
         //will get the value of alarm
 //        boolean alarm_Type = false;
 //        if (newAlarm_Information.alarm_Type.isChecked() == true) {
@@ -247,12 +248,12 @@ public class JSONParseTest{
         return true;
     }
 
-    private static void set_Alarm(JSONParseTest a){
+    private void set_Alarm(JSONParseTest a){
         a.Alarm = 1;
 
     }
 
-    public static boolean get_On_Time(){
+    public boolean get_On_Time(){
         //will get the value of On_time
 //        boolean on_Time = false;
 //        if (newAlarm_Information.on_Time.isChecked() == true) {
@@ -262,18 +263,18 @@ public class JSONParseTest{
         return true;
     }
 
-    private static void set_On_Time(JSONParseTest a){
+    private void set_On_Time(JSONParseTest a){
         a.On_Time = 1;
         
 
     }
 
-    public static int get_Repeatable(){
+    public int get_Repeatable(){
         //will get the value of description
         return 0;
     }
 
-    private static void set_Repeatable(JSONParseTest a){
+    private void set_Repeatable(JSONParseTest a){
         a.Repeatable = get_Repeatable();
 
     }
