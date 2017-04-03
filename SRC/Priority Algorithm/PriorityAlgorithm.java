@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package priority.algorithm;
 
 import java.text.SimpleDateFormat;
@@ -19,23 +14,18 @@ public class PriorityAlgorithm {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyy");
-        String formattedDate = df.format(c.getTime());
-        int i = c.get(Calendar.HOUR_OF_DAY);
-        System.out.println(daysUntilReminder(3, 9, 2018)[0]);
-        System.out.println(daysToDate(3, 0, 0));
-        String a = "12345";
-        System.out.println(a.charAt(3));
+        String[] a = getPriorityDateandTime(4, 10, 2017, 3, 30,5);
+        System.out.println(a[0]);
+        System.out.println(a[1]);
+        System.out.println(a[2]);
+        System.out.println(a[3]);
+        System.out.println(a[4]);
+        
+       
         
         //System.our.println(daysUntilReminder(df));
         // TODO code application logic here
     }
-    
-    /*
-    To avoid several loops of increments  in other methods, this method returns
-    days in the month
-    */
     public static int daysInMonth(int month) {
         Calendar calendar = Calendar.getInstance();
 
@@ -81,7 +71,7 @@ public class PriorityAlgorithm {
     /*
     In the case that the user designates a specific time, the number of hours
     and minutes must be included in the calculation. This method does the calculation
-    
+
     If the the minutes are negative, that means it must decrement an hours, and
     add that negative value to 60 minutes to calculate the difference.
     */
@@ -121,73 +111,25 @@ public class PriorityAlgorithm {
     /*
     daysUntilReminder calculates the number of days there are between the current date
     and the deadline of the user's event.
-    
+
     It is split into two methods, one where the user picked a specific time and
     one where the user did not.
-    
+
     The one below simply calculates days
-    
+
     */
-    public static int[] daysUntilReminder(int month, int day, int year){
-                Calendar cal = Calendar.getInstance();
-        
-        int dayCount = 0;
-        int[] timeUntil = new int[3];
-        int currentMonth = cal.get(Calendar.MONTH) + 1;
-        int currentDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-        int currentYear = cal.get(Calendar.YEAR);
-        int[] timeCount = timeUntilReminder(0, 0);
 
-        if (month == currentMonth) {
-            while (year != currentYear) {
-                dayCount += 365;
-                currentYear += 1;
-            }
-        } else {
-            while (month != currentMonth) {
-                dayCount += daysInMonth(currentMonth);
-                if (currentMonth == 12) {
-                    currentMonth = 1;
-                    currentYear += 1;
-                } else {
-                    currentMonth += 1;
-                }
 
-            }
-        }
-
-        while (day > currentDayOfMonth) {
-            dayCount += 1;
-            currentDayOfMonth++;
-        }
-
-        while (day < currentDayOfMonth) {
-            dayCount -= 1;
-            currentDayOfMonth--;
-        }
-        if (timeCount[0] < 0) {
-            dayCount -= 1;
-            timeCount[0] = (24 + timeCount[0]);
-
-        }
-        timeUntil[0] = dayCount;
-        timeUntil[1] = timeCount[0];
-        timeUntil[2] = timeCount[1];
-        return timeUntil;
-        
-        
-    }
-    
     /*
     daysUntilReminder calculates the number of days there are between the current date
     and the deadline of the user's event.
-    
+
     It is split into two methods, one where the user picked a specific time and
     one where the user did not.
-    
+
     The one below includes time into the calculation, overrides the other
-    one when the user selects a time. 
-    It returns an ARRAY of INT's. 
+    one when the user selects a time.
+    It returns an ARRAY of INT's.
         int[0] contains the number of full days
         int[1] contains the number of full hours
         int[2] contains the exact number of minutes
@@ -240,166 +182,33 @@ public class PriorityAlgorithm {
         return counts;
 
     }
-    
+
     /*
-    setPriorityDate sets the alert for the users event. 
-    
+    setPriorityDate sets the alert for the users event.
+
     It is split into two methods, one that calculates a specific time and one that
     does not
-    
+
     The one below does not calculate time, it calls daysUntilReminder to get
     information.
     */
-    public boolean setPriorityDate(int month, int day, int year, double priority){
-        Calendar cal = Calendar.getInstance();
-        int currentMonth = cal.get(Calendar.MONTH) + 1;
-        int currentDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-        int currentHour = cal.get(Calendar.HOUR_OF_DAY);
-        int currentMinute = cal.get(Calendar.MINUTE);
-       
-        int reminderMonth;
-        int reminderDay;
-        int reminderHour;
-        int reminderMinute;
-        
-        int[] daysUntil = daysUntilReminder(month, day, year);
-        
-        
-   
-        if (daysUntil[0] < 1){
-            if (cal.get(Calendar.HOUR_OF_DAY)<9){
-                if (priority<5){
-                    
-                }
-                else{
-                    
-                }
-                    
-            }
-            else if (cal.get(Calendar.HOUR_OF_DAY)<12){
-                if (priority<5){
-                    
-                }
-                else{
-                    
-                }
-            }
-            else if (cal.get(Calendar.HOUR_OF_DAY)<15){
-                if (priority<5){
-                    
-                }
-                else{
-                    
-                }
-            }
-            else if (cal.get(Calendar.HOUR_OF_DAY)<20){
-                if (priority<5){
-                    
-                }
-                else{
-                    
-                }
-            }
-            else if (cal.get(Calendar.HOUR_OF_DAY)<24){
-                if (priority<5){
-                    
-                }
-                else{
-                    
-                }
-            }
-                
-            
-            
-        }
-        
-        /*
-        may be more useful to simply multiply the priority percentage by 24 
-        in a way that produces reasonable times for the 10 values.
-        */
-        switch (daysUntil[0]){
-            
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                break;
-                        
-                       
-                        
-            
-           
-                
-            
-            
-            
-            
-        }
-        
-        if (daysUntil[0] <= 3){
-            
-            
-        }
-        
-        else if ( 3 < daysUntil[0] && daysUntil[0] <= 5) {
 
-        }
 
-        else if (5 < daysUntil[0] &&daysUntil[0] <= 7) {
 
-        }
-
-        else if (7 < daysUntil[0] &&daysUntil[0] <= 14) {
-
-        }
-
-        else if (14 < daysUntil[0] &&daysUntil[0] <= 28) {
-
-        }
-
-        else if (28 < daysUntil[0] &&daysUntil[0] <= 56) {
-
-        }
-
-        else if (56 < daysUntil[0] &&daysUntil[0] <= 84) {
-
-        }
-
-        else if (daysUntil[0] > 84) {
-
-        }
-        
-        return true;
-    }
-
-    
     /*
-    setPriorityDate sets the alert for the users event. 
-    
+    setPriorityDate sets the alert for the users event.
+
     It is split into two methods, one that calculates a specific time and one that
     does not
-    
+
     The one below calculates the date with a specific time in mind.
     It calls daysUntilReminder with hours and minutes in mind.
     It uses the ARRAY of length 3 returned by the method.
     */
-    public boolean setPriorityDate(int month, int day, int year, int hour, int minute, double priority) {
+    public static String[] getPriorityDateandTime(int month, int day, int year, int hour, int minute, double priority) {
         Calendar cal = Calendar.getInstance();
+        String[] dateAndTime = new String[5];
+       
 
         int currentMonth = cal.get(Calendar.MONTH) + 1;
         int currentDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
@@ -417,125 +226,38 @@ public class PriorityAlgorithm {
         int minutesUntil = until[2];
 
         double priorityPercent = priority / 100;
-        
+        double priotiyPercentResult = 110 - (priority*15);
+        double daysToHours = daysUntil*24;
+        double totalHours =daysToHours + hoursUntil;
+        double totalHoursToMinutes = totalHours * 60;
+        double totalMinutes = totalHoursToMinutes + minutesUntil;
+        double totalMinutesUntilAlert = (totalMinutes * (priotiyPercentResult/100));
 
-        if (daysUntil == 0) {
-            if (hoursUntil > 5 && hoursUntil < 8) {
-                if (priority >= 8) {
-                    //set alert for  5 hours later
-                }
-                else if (priority >= 5) {
-                    //set alert for 6 hours later
-                }
-                else if(priority < 5) {
-                    //set alert for 5 hours later
+        double minutesToHours = totalMinutesUntilAlert/60;
 
-                }
-            }
-        }
+        double wholeHoursUntilAlert = Math.floor(minutesToHours);
 
-           else if (hoursUntil <= 12) {
-                if (priority >= 8) {
-                   // four hours later
-                }
-                else if (priority >= 5) {
-                    //set alert for 6 hours later
-                }
-                else if(priority < 5) {
-                    //set alert for 8 hours later
-                }
-       
-        }
-       else if (daysUntil <= 5) {
-             if (priority >= 8) {
-                    //1.5 day later
-                }
-                else if (priority >= 5) {
-                    //3 days
-                }
-                else if(priority < 5) {
-                   //4 days
-            
-            
+        double minutesUntilAlert = Math.floor((minutesToHours - wholeHoursUntilAlert)*60);
 
-        }
-        }
-       else if (daysUntil <= 7) {
-            if (priority >= 8) {
-                   //3 days
-                }
-                else if (priority >= 5) {
-                    //5 days later
-                }
-                else if(priority < 5) {
-                   //6 days later
-                }
-        }
+        double hoursToDays = wholeHoursUntilAlert/24;
+        double wholeDaysUntilAlert = Math.floor(hoursToDays);
+        double hoursUntilAlert = Math.floor((hoursToDays-wholeDaysUntilAlert)*24);
 
-       else if (daysUntil <= 14) {
-            if (priority >= 8) {
-                   //80%
-                }
-                else if (priority >= 5) {
-                   //50%
-                }
-                else if(priority < 5) {
-                  //30%
-                }
-        }
 
-        else if (daysUntil <= 28) {
-             if (priority >= 8) {
-                   //70%
-                }
-                else if (priority >= 5) {
-                    //50%
-                }
-                else if(priority < 5) {
-                    //20%
-                }
-        }
-       else if (daysUntil <= 56) {
-             if (priority >= 8) {
-                    //80%
-                }
-                else if (priority >= 5) {
-                    //50%
-                }
-                else if(priority < 5) {
-                    //30%
-                }
-        }
+        dateAndTime = daysToDate(wholeDaysUntilAlert, hoursUntilAlert, minutesUntilAlert);
+        System.out.println(minutesUntilAlert + "hi");
 
-        else if (daysUntil <= 84) {
-            if (priority >= 8) {
-                    //60%$
-                }
-                else if (priority >= 5) {
-                    //40%
-                }
-                else if(priority < 5) {
-                    //20%
-                }
-        }
 
-        else if(daysUntil > 84) {
-            if (priority >= 8) {
-                    //50%
-                }
-                else if (priority >= 5) {
-                    //35%
-                }
-                else if(priority < 5) {
-                    //15%
-                }
-        }
 
-        return true;
 
-    
+
+
+
+        return dateAndTime;
+
+
     }
-    public static String daysToDate(int days, int hours, int minutes){
+    public static String[] daysToDate(double days, double hours, double minutes){
         Calendar cal = Calendar.getInstance();
         int currentMonth = cal.get(Calendar.MONTH) + 1;
         int currentDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
@@ -552,11 +274,11 @@ public class PriorityAlgorithm {
                     currentYear+=1;
                     days-=365;
                 }
-                
+
                 else
                     break;
             }
-            
+
         }
         while(days>=daysInMonth(currentMonth)){
             days-=daysInMonth(currentMonth);
@@ -571,26 +293,62 @@ public class PriorityAlgorithm {
             days-=1;
         }
         while(hours!=0){
+
             currentHour +=1;
+
             hours-=1;
-            
+            if (currentHour == 24)
+                currentHour =0;
+
         }
         while(minutes!=0){
             currentMinute +=1;
             minutes-=1;
-            
+            if (currentMinute == 60)
+                currentMinute = 0;
+
         }
-        
-        String alertDateTime = Integer.toString(currentMonth)+Integer.toString(currentDayOfMonth)+
-                Integer.toString(currentYear)+Integer.toString(currentHour)+
-                Integer.toString(currentMinute);
-        
-        return alertDateTime;
-        
-        
-        
-        
-        
+        String m = "";
+        if (currentMonth <= 9)
+            m = "0" + Integer.toString(currentMonth);
+        else
+            m = Integer.toString(currentMonth);
+        String d = "";
+        if (currentDayOfMonth <= 9){
+            d = "0" + Integer.toString(currentDayOfMonth);
+        }
+        else
+            d = Integer.toString(currentDayOfMonth);
+        String y = Integer.toString(currentYear);
+        String h = "";
+        if (currentHour <= 9){
+            h = "0" + Integer.toString(currentHour);
+
+        }
+        else
+            h = Integer.toString(currentHour);
+        String min = "";
+        if (currentMinute <= 9){
+            min = "0" + Integer.toString(currentMinute);
+        }
+        else
+            min = Integer.toString (currentMinute);
+        String[] stringArray = new String[5];
+        stringArray[0] = m;
+        stringArray[1] = d;
+        stringArray[2] = y;
+        stringArray[3] = h;
+        stringArray[4] = min;
+        return stringArray;
+
+
+
+
+
+
+
+
+
     }
     public static boolean isLeapYear(int year){
         if (year == 2020||year==2024||year==2028||year==2032||year==2036||year==2040)
@@ -599,5 +357,4 @@ public class PriorityAlgorithm {
             return false;
     }
 }
-
 
