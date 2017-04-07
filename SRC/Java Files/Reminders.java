@@ -127,25 +127,45 @@ public class Reminders extends AppCompatActivity implements GoogleApiClient.Conn
         }
 
        // The way that I suggest going about queries is with rawQuery.
-       // Cursor c = reminderDB.rawQuery("SELECT Description, priority, dueDate, dueTime from Reminder", null);
+    
        // and just get each result row into its own little square somehow.
+        
 
-        /* Following the SQLite Database tutorial exampled a way to store each queried
-            row in a list of arrays. This was the code
+
+        /* 
+           
             SQLiteDatabase reminderDB = mDBHelper.getReadableDatabase();
-        String[] projection = {
-                FeedReaderContract.FeedEntry.RID,
-                FeedReaderContract.FeedEntry.columnDescription
-        };
-        String selection = FeedReaderContract.FeedEntry.RID + " = ?";
-        String[] selectionArgs = { "A1" };
-
-        List itemIds = new ArrayList<>();
-         while(cursor.moveToNext()) {
-             long itemId = cursor.getLong(
-             cursor.getColumnIndexOrThrow(FeedEntry._ID));
-             itemIds.add(itemId);
-         }
+            
+            Cursor c = reminderDB.rawQuery("SELECT Description, priority, dueDate, dueTime from Reminder", null);
+            c.moveToFirst();
+            /*
+            this getString will return the value the tuple in the first result of the query that was specified as a string.
+            in this query it was the Description
+            String a = c.getString(0);
+             getString(0) will return the priority, and so on from the order in which they are inserted in
+            setAlarm.
+            
+            This will go to the next tuple in the result of the query. 
+            c.moveToNext(); 
+            You should do this until c.moveToNext() either doesn't exist or comes out to be a 
+            tuple that you've already read. I'm not sure the best way to do that part of the loop
+            but I'll leave you to figure that out. this link MIGHT have that secret
+            https://www.tutorialspoint.com/android/android_sqlite_database.htm
+            I don't actually know.
+            
+            If that doesn't help then try reading up on this;
+            https://developer.android.com/reference/android/database/Cursor.html
+            and on this
+            
+            https://developer.android.com/training/basics/data-storage/databases.html
+            
+            
+            
+            
+            c.close();
+            */
+     
+        
          cursor.close();
          */
         reminderDB.close();
