@@ -1,5 +1,8 @@
 package com.seniorproject.prioritize;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.database.Cursor;
@@ -14,6 +17,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateUtils;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,22 +119,10 @@ public class Reminders extends AppCompatActivity implements GoogleApiClient.Conn
         Typeface myfont = Typeface.createFromAsset(getAssets(), "Pacifico.ttf");
         TextView app_title = (TextView) findViewById(R.id.mytitle);
         app_title.setTypeface(myfont);
-        //for alarm info
-        TextView newAlarmDescription = (TextView) findViewById(R.id.alarm_text);
-        Intent intent = getIntent();
-        String alarmInfo = intent.getStringExtra("alarmDescription");
-        newAlarmDescription.setText(alarmInfo);
-        if (newAlarmDescription.getText() == alarmInfo) {
-            newAlarmDescription.setVisibility(View.VISIBLE);
-            //List of alarms
-            alarmList = (ListView) findViewById(R.id.alarmListView);
-            arrList = new ArrayList<String>();
-            arrAdapter = new ArrayAdapter<String>(Reminders.this, android.R.layout.simple_list_item_1, arrList);
-            alarmList.setAdapter(arrAdapter);
-            arrAdapter.add(alarmInfo);
-            arrAdapter.notifyDataSetChanged();
 
-        }
+
+
+
 
         // The way that I suggest going about queries is with rawQuery.
 
@@ -180,6 +173,42 @@ public class Reminders extends AppCompatActivity implements GoogleApiClient.Conn
         Intent addAlarmView = new Intent(this, SetAlarm.class);
         startActivityForResult(addAlarmView, alarmrequestCode);
     }
+
+    public void stopAlarm(View view) {
+        Intent objIntent = new Intent(this, PlayAudio.class);
+        stopService(objIntent);
+    }
+    //Snooze
+//    public void snooze(View view) {
+//
+//        Intent objIntent = new Intent(this, PlayAudio.class);
+//        stopService(objIntent);
+//
+//        SetAlarm snoozeSet = new SetAlarm();
+//        Intent intent = new Intent(this, PlayAudio.class);
+//
+//        //Set Calendar Value for Snooze Alarm
+//        Calendar calendar = Calendar.getInstance();
+//        //int snoozeTime = mMinute + SNOOZE_MIN;
+//        calendar.add(Calendar.MINUTE, 1); //SNOOZE_MIN = 1;
+//        long snoozeTime = calendar.getTimeInMillis();
+//        //Build Intent and Pending Intent to Set Snooze Alarm
+//        Intent AlarmIntent = new Intent(SnoozeActivity.this, AlarmReceiver.class);
+//        AlarmManager AlmMgr = (AlarmManager)getSystemService(ALARM_SERVICE);
+//        AlarmIntent.putExtra("REQUEST CODE", req_code);
+//        PendingIntent Sender = PendingIntent.getBroadcast(SnoozeActivity.this, req_code, AlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        AlmMgr.set(AlarmManager.RTC_WAKEUP, snoozeTime, Sender);
+//        timer.cancel();
+//        PendingIntent pendingIntent = PendingIntent.getService(this, snoozeSet.getAlarmID(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        long currentTimeMillis = System.currentTimeMillis();
+//        long nextUpdateTimeMillis = currentTimeMillis + 5 * DateUtils.MINUTE_IN_MILLIS;
+//        Time nextUpdateTime = new Time();
+//        nextUpdateTime.set(nextUpdateTimeMillis);
+//
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.set(AlarmManager.RTC_WAKEUP, nextUpdateTimeMillis, pendingIntent);
+//    }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
@@ -552,26 +581,31 @@ public class Reminders extends AppCompatActivity implements GoogleApiClient.Conn
                 alarm_time = "Alarm is set to:" + "\n" + month + "-" + day + "-" + year + "\n" + hour + ":" + minutes;
             }
         }
+
+        String myAlarms = "";
+        alarmList = (ListView) findViewById(R.id.alarmListView);
+        arrList = new ArrayList<String>();
+
+
         ////Daddy
         FeedReaderDBHelper mDBHelper = new FeedReaderDBHelper(getApplicationContext());
         SQLiteDatabase reminderDB = mDBHelper.getReadableDatabase();
 //
         Cursor c = reminderDB.rawQuery("SELECT Description, priority, dueDate, dueTime from Reminder", null);
-       // c.moveToFirst(); try with this being commented out, if doesnt work try wirh it not being commentted out 
+        // c.moveToFirst(); try with this being commented out, if doesnt work try wirh it not being commentted out
+
         while (c.moveToNext())
         {
             //List of alarms
-            alarmList = (ListView) findViewById(R.id.alarmListView);
-            arrList = new ArrayList<String>();
             arrAdapter = new ArrayAdapter<String>(Reminders.this, android.R.layout.simple_selectable_list_item, arrList);
-            arrList.add(c.getString(1));
+            myAlarms = c.getString(0) + '\n' + "Priority: " + c.getString(1) + '\n' + "Date: " + c.getString(2) + '\n' + "Time: " + c.getString(3);
+            arrList.add(myAlarms);
             alarmList.setAdapter(arrAdapter);
             arrAdapter.notifyDataSetChanged();
             c.moveToNext();
         }
         c.close();
         reminderDB.close();
-
 
 
 
@@ -590,6 +624,17 @@ public class Reminders extends AppCompatActivity implements GoogleApiClient.Conn
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
 
+                Button btnEdit = (Button) popupView.findViewById(R.id.edit);
+
+                btnEdit.setOnClickListener(new Button.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        Intent editAlarmIntent = new Intent(Reminders.this, EditAlarm.class);
+                        startActivity(editAlarmIntent);
+                    }
+                });
+
                 Button btnDelete = (Button) popupView.findViewById(R.id.delete);
 
                 btnDelete.setOnClickListener(new Button.OnClickListener() {
@@ -599,6 +644,23 @@ public class Reminders extends AppCompatActivity implements GoogleApiClient.Conn
                         // TODO Auto-generated method stub
                         arrList.remove(position);//position of item you click
                         arrAdapter.notifyDataSetChanged();
+
+                        //SQLite deletion
+//                        FeedReaderDBHelper mDBHelper = new FeedReaderDBHelper(getApplicationContext());
+//                        SQLiteDatabase reminderDB = mDBHelper.getReadableDatabase();
+//                        Cursor c = reminderDB.rawQuery("SELECT RID from Reminder", null);
+//                        SetAlarm my_id = new SetAlarm();
+//
+//                        while (c.moveToNext())
+//                        {
+//                            if (id == my_id.getAlarmID()){
+//                                deleteReminderFromSQLite(c.getString(0));
+//                            }
+//
+//                            c.moveToNext();
+//                        }
+//                        c.close();
+//                        reminderDB.close();
                         popupWindow.dismiss();
                     }
                 });
@@ -729,6 +791,8 @@ public class Reminders extends AppCompatActivity implements GoogleApiClient.Conn
 
 
     }
+
+
 
     public class MyDriveEventService extends DriveEventService {
         public void onChange(ChangeEvent event){

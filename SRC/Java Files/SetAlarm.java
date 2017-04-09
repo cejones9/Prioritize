@@ -1,26 +1,36 @@
 package com.seniorproject.prioritize;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.icu.util.Calendar;
+import android.media.AudioManager;
 import android.os.ParcelFileDescriptor;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -60,7 +70,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -70,10 +82,10 @@ public class SetAlarm extends AppCompatActivity implements GoogleApiClient.Conne
     TimePicker alarm_TimePicker;
     DatePicker alarm_DatePicker;
     EditText alarm_Description;
-    SeekBar priority_Bar;
+    Spinner priority_DropDown;
     CheckBox alarm_Type;
     CheckBox on_Time;
-    int priority_Value;
+    double priority_Value;
     int hour, minute, year, month, day;
     public GoogleApiClient mGoogleApiClient;
     private static final int REQUEST_CODE_CAPTURE_IMAGE = 1;
@@ -115,7 +127,23 @@ public class SetAlarm extends AppCompatActivity implements GoogleApiClient.Conne
         alarm_Description = (EditText) findViewById(R.id.descriptionText);
 
         //initialize priority_Bar
-        priority_Bar = (SeekBar) findViewById(R.id.priorityBar);
+        priority_DropDown = (Spinner) findViewById(R.id.priorityDropDown);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.priority, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        priority_DropDown.setAdapter(adapter);
+        priority_DropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                Object item = parent.getItemAtPosition(pos);
+                String itemTest = String.valueOf(item);
+                priority_Value = Integer.valueOf(itemTest);
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         //initialize alarm_type checkbox
         alarm_Type = (CheckBox) findViewById(R.id.alarmCheckBox);
@@ -135,83 +163,129 @@ public class SetAlarm extends AppCompatActivity implements GoogleApiClient.Conne
             public void onClick(View view) {
 
 
+                calendar.set(alarm_DatePicker.getYear(),alarm_DatePicker.getMonth(),alarm_DatePicker.getDayOfMonth(),
+                        alarm_TimePicker.getHour(),alarm_TimePicker.getMinute());
 
 
-                priority_Value = priority_Bar.getProgress()/10;
+                if (alarm_Type.isChecked()) {//ringtone
 
-                //passing information from alarm setup activity to reminders activity
-                String datePicked = date_Picked();
-                String timePicked = time_Picked();
-                String reminderDescription = alarm_Description.getText().toString();
-                int onTime = 0;
-                int alarm = 0;
-                if (on_Time.isChecked())
-                    onTime = 1;
-                if (alarm_Type.isChecked()){
-                    alarm = 1;
+                    calendar.set (Calendar.SECOND,0);
+
+                    Intent intent = new Intent(SetAlarm.this, PlayAudio.class);
+                    PendingIntent penInt = PendingIntent.getService(SetAlarm.this.getApplicationContext(), getAlarmID(), intent, 0);
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTime().getTime(), penInt);
+
+                    Toast.makeText(SetAlarm.this, "Alarm is set!" + calendar.getTime(), Toast.LENGTH_LONG).show();
                 }
+                else   {
+                    calendar.set (Calendar.SECOND,0);
+                    Intent push = new Intent(SetAlarm.this, Reminders.class);
+                    PendingIntent pi = PendingIntent.getActivity(SetAlarm.this, getAlarmID(), push,
+                            PendingIntent.FLAG_ONE_SHOT);
+
+                    Context context = SetAlarm.this;
+                    NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                            .setSmallIcon(R.drawable.ic_launcher)
+                            .setContentTitle("Reminder")
+                            .setContentText(alarm_Description.getText())
+                            .setDefaults(Notification.DEFAULT_ALL)
+                            .setPriority(NotificationCompat.PRIORITY_HIGH)
+                            .setAutoCancel(true)
+                            .setWhen(calendar.getTime().getTime())
+                            .setTicker("Reminder")
+                            .setContentIntent(pi);
+                    notificationManager.notify(getAlarmID(), builder.build());
+
+//                    if (calendar.getTimeInMillis()==System.currentTimeMillis()) {
+//                        //Intent addAlarmView = new Intent(SetAlarm.this, MyBroadcastReceiver.class);
+//                        Vibrator v = (Vibrator) SetAlarm.this.getSystemService(Context.VIBRATOR_SERVICE);
+//                        // Vibrate for 500 milliseconds
+//                        v.vibrate(500);
+//                    }
+                }
+
+                //get int values
+                year = alarm_DatePicker.getYear();
+                month = alarm_DatePicker.getMonth() + 1;
+                day = alarm_DatePicker.getDayOfMonth();
+                hour = alarm_TimePicker.getHour();
+                minute = alarm_TimePicker.getMinute();
+
+                //convert to string
+                String year_String = String.valueOf(year);
+                String month_String = String.valueOf(month);
+                String day_String = String.valueOf(day);
+                String hour_string = String.valueOf(hour);
+                String minute_string = String.valueOf(minute);
+
+                Intent alarmData = new Intent();
+                //---set the data to pass back---
+                alarmData.putExtra("year", year_String);
+                alarmData.putExtra("month", month_String);
+                alarmData.putExtra("day", day_String);
+                alarmData.putExtra("hour", hour_string);
+                alarmData.putExtra("minute", minute_string);
+                setResult(RESULT_OK, alarmData);
+                //---close the activity---
+                finish();
+//                Intent alarmset = new Intent(SetAlarm.this, Reminders.class);
+//                startActivity(alarmset);
+
+
+
                 /*
-                String dateAndTime = priorityAlgorithm.getPriorityDateandTime(alarm_DatePicker.getMonth(), alarm_DatePicker.getDayOfMonth(), alarm_DatePicker.getYear(), alarm_TimePicker.getHour(), alarm_TimePicker.getMinute(), priority_Value);
-                char[] alertDate = new char[8];
-                char[] alertTime = new char[4];
-                dateAndTime.getChars(0, 7, alertDate, 0);
-                dateAndTime.getChars(8, 11, alertTime, 0);
-                when the priority algorithm is completely finished this is how we weill extract the dates to set alerts for those times.
-                */
-
-
-
-
-
-
-                String alarmText = "Alarm set to: " + "\n" + timePicked + "\n" + datePicked + "\n"
-                        + reminderDescription + "\n Priority Value = " + priority_Value;
-                Intent setNewAlarm = new Intent (getApplicationContext(), Reminders.class);
-                setNewAlarm.putExtra("alarmDescription", alarmText);
-                startActivity(setNewAlarm);
-
-
-
-                /*
-
-
-
-
-
-
                 STILL NEED TO CHECK DRIVE FOLDER FOR FILES WITH THE SAME UUID.
                 CONFLICT PROBABLY WON'T HAPPEN, BUT PREVENTING IT IS NECESSARY.
-
-
-
-
-
-
                  */
 
-                String[] calculations = new String[5];
-                calculations = priorityAlgorithm.getPriorityDateandTime(alarm_DatePicker.getMonth()+1, alarm_DatePicker.getDayOfMonth(), alarm_DatePicker.getYear(), alarm_TimePicker.getHour(), alarm_TimePicker.getMinute(), 1);
+//                String[] calculations = new String[5];
+//                //calculations = priorityAlgorithm.getPriorityDateandTime(alarm_DatePicker.getMonth()+1, alarm_DatePicker.getDayOfMonth(), alarm_DatePicker.getYear(), alarm_TimePicker.getHour(), alarm_TimePicker.getMinute(), 1);
+//                int alarmID = getAlarmID();
+//                String RID = createRID();
+//                ContentValues values = new ContentValues();
+//                values.put(FeedReaderContract.FeedEntry.RID, RID);
+//                values.put(FeedReaderContract.FeedEntry.columnDescription, alarm_Description.getText().toString());
+//                values.put(FeedReaderContract.FeedEntry.columnDueDate, date_Picked());
+//                values.put(FeedReaderContract.FeedEntry.columnDueTime, time_Picked());
+//                values.put(FeedReaderContract.FeedEntry.columnCalculatedDate, calculations[0]+calculations[1]+calculations[2]);
+//                values.put(FeedReaderContract.FeedEntry.columnCalculatedTime, calculations[3] + calculations[4]);
+//                values.put(FeedReaderContract.FeedEntry.columnPriority, priority_Value);
+//                values.put(FeedReaderContract.FeedEntry.columnAlarm, alarm_Type.isChecked());
+//                values.put(FeedReaderContract.FeedEntry.columnOnTime, on_Time.isChecked());
+//                values.put(FeedReaderContract.FeedEntry.columnRepeatNumber, "0");
+//                values.put(FeedReaderContract.FeedEntry.columnAlarmSchedulerID, alarmID);
+
+
+                int calc1 = alarm_DatePicker.getMonth()+1;
+                int calc2 = alarm_DatePicker.getDayOfMonth();
+                int calc3 = alarm_DatePicker.getYear();
+                int calc4 = alarm_TimePicker.getHour();
+                int calc5 = alarm_TimePicker.getMinute();
+
                 int alarmID = getAlarmID();
                 String RID = createRID();
                 ContentValues values = new ContentValues();
                 values.put(FeedReaderContract.FeedEntry.RID, RID);
-                values.put(FeedReaderContract.FeedEntry.columnDescription, reminderDescription);
-                values.put(FeedReaderContract.FeedEntry.columnDueDate, datePicked);
-                values.put(FeedReaderContract.FeedEntry.columnDueTime, timePicked);
-                values.put(FeedReaderContract.FeedEntry.columnCalculatedDate, calculations[0]+calculations[1]+calculations[2]);
-                values.put(FeedReaderContract.FeedEntry.columnCalculatedTime, calculations[3] + calculations[4]);
+                values.put(FeedReaderContract.FeedEntry.columnDescription, alarm_Description.getText().toString());
+                values.put(FeedReaderContract.FeedEntry.columnDueDate, date_Picked());
+                values.put(FeedReaderContract.FeedEntry.columnDueTime, time_Picked());
+                values.put(FeedReaderContract.FeedEntry.columnCalculatedDate, calc1+calc2+calc3);
+                values.put(FeedReaderContract.FeedEntry.columnCalculatedTime, calc4 + calc5);
                 values.put(FeedReaderContract.FeedEntry.columnPriority, priority_Value);
-                values.put(FeedReaderContract.FeedEntry.columnAlarm, alarm);
-                values.put(FeedReaderContract.FeedEntry.columnOnTime, onTime);
+                values.put(FeedReaderContract.FeedEntry.columnAlarm, alarm_Type.isChecked());
+                values.put(FeedReaderContract.FeedEntry.columnOnTime, on_Time.isChecked());
                 values.put(FeedReaderContract.FeedEntry.columnRepeatNumber, "0");
                 values.put(FeedReaderContract.FeedEntry.columnAlarmSchedulerID, alarmID);
 
 
                 SQLiteInsertion(values);
-              // JSON jsonObject = new JSON(RID, reminderDescription, datePicked, timePicked, calculations[0] + calculations[1] + calculations[2], calculations[3] + calculations[4],
-                    //   Integer.toString(priority_Value ), alarm, onTime, 0);
-               // String jsonString = jsonObject.JSONString;
-               // saveToDrive(jsonString, RID);
+                // JSON jsonObject = new JSON(RID, reminderDescription, datePicked, timePicked, calculations[0] + calculations[1] + calculations[2], calculations[3] + calculations[4],
+                //   Integer.toString(priority_Value ), alarm, onTime, 0);
+                // String jsonString = jsonObject.JSONString;
+                // saveToDrive(jsonString, RID);
                 saveToDrive("jsonStringHEre", RID);
 
 
@@ -226,7 +300,6 @@ public class SetAlarm extends AppCompatActivity implements GoogleApiClient.Conne
         /*
         cycle through SQL database just to make sure there are no RID conflicts
         no need to check the drive.
-
          */
 
 
@@ -312,41 +385,41 @@ public class SetAlarm extends AppCompatActivity implements GoogleApiClient.Conne
         Drive.DriveApi.newDriveContents(mGoogleApiClient).setResultCallback(new ResultCallback<DriveApi.DriveContentsResult>() {
             @Override
             public void onResult(@NonNull DriveApi.DriveContentsResult result) {
-                        if (!result.getStatus().isSuccess()) {
-                            Toast.makeText(getApplicationContext(), "Could not Create DriveContents", Toast.LENGTH_SHORT).show();
+                if (!result.getStatus().isSuccess()) {
+                    Toast.makeText(getApplicationContext(), "Could not Create DriveContents", Toast.LENGTH_SHORT).show();
 
-                            // Handle error
-                            return;
-                        }
-                        DriveContents contents = result.getDriveContents();
-                        ParcelFileDescriptor parcelFileDescriptor = contents.getParcelFileDescriptor();
-                        FileOutputStream fileOutputStream = new FileOutputStream(parcelFileDescriptor.getFileDescriptor());
-                        Writer writer = new OutputStreamWriter(fileOutputStream);
-                        try {writer.write("JSON String will go here" + RID);
-                        writer.close();} catch (IOException e){ }
+                    // Handle error
+                    return;
+                }
+                DriveContents contents = result.getDriveContents();
+                ParcelFileDescriptor parcelFileDescriptor = contents.getParcelFileDescriptor();
+                FileOutputStream fileOutputStream = new FileOutputStream(parcelFileDescriptor.getFileDescriptor());
+                Writer writer = new OutputStreamWriter(fileOutputStream);
+                try {writer.write("JSON String will go here" + RID);
+                    writer.close();} catch (IOException e){ }
 
 
                 final MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
-                                .setTitle(RID)
-                                .setMimeType("text/plain")
-                                .build();
-                        final DriveContents abc = contents;
-                        final DriveFolder folder = Drive.DriveApi.getAppFolder(mGoogleApiClient);
-                        Query query = new Query.Builder()
-                                .addFilter(Filters.eq(SearchableField.TITLE, "REMINDERS"))
-                                .build();
-                        folder.queryChildren(mGoogleApiClient, query).setResultCallback(new ResultCallback<DriveApi.MetadataBufferResult>() {
-                            @Override
-                            public void onResult(@NonNull DriveApi.MetadataBufferResult metadataBufferResult) {
-                                DriveId reminderFolderID = metadataBufferResult.getMetadataBuffer().iterator().next().getDriveId();
-                                DriveFolder reminderFolder = Drive.DriveApi.getFolder(mGoogleApiClient, reminderFolderID);
-                                reminderFolder.removeChangeSubscription(mGoogleApiClient);
-                                reminderFolder.createFile(mGoogleApiClient, changeSet, abc);
-                            }
-                        });
-                return;
+                        .setTitle(RID)
+                        .setMimeType("text/plain")
+                        .build();
+                final DriveContents abc = contents;
+                final DriveFolder folder = Drive.DriveApi.getAppFolder(mGoogleApiClient);
+                Query query = new Query.Builder()
+                        .addFilter(Filters.eq(SearchableField.TITLE, "REMINDERS"))
+                        .build();
+                folder.queryChildren(mGoogleApiClient, query).setResultCallback(new ResultCallback<DriveApi.MetadataBufferResult>() {
+                    @Override
+                    public void onResult(@NonNull DriveApi.MetadataBufferResult metadataBufferResult) {
+                        DriveId reminderFolderID = metadataBufferResult.getMetadataBuffer().iterator().next().getDriveId();
+                        DriveFolder reminderFolder = Drive.DriveApi.getFolder(mGoogleApiClient, reminderFolderID);
+                        reminderFolder.removeChangeSubscription(mGoogleApiClient);
+                        reminderFolder.createFile(mGoogleApiClient, changeSet, abc);
                     }
                 });
+                return;
+            }
+        });
         return;
     }
     @Override
