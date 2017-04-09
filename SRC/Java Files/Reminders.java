@@ -552,13 +552,13 @@ public class Reminders extends AppCompatActivity implements GoogleApiClient.Conn
                 alarm_time = "Alarm is set to:" + "\n" + month + "-" + day + "-" + year + "\n" + hour + ":" + minutes;
             }
         }
-        ////papa
+        ////Daddy
         FeedReaderDBHelper mDBHelper = new FeedReaderDBHelper(getApplicationContext());
         SQLiteDatabase reminderDB = mDBHelper.getReadableDatabase();
 //
         Cursor c = reminderDB.rawQuery("SELECT Description, priority, dueDate, dueTime from Reminder", null);
-        c.moveToFirst();
-        while (!c.isAfterLast())
+       // c.moveToFirst(); try with this being commented out, if doesnt work try wirh it not being commentted out 
+        while (c.moveToNext())
         {
             //List of alarms
             alarmList = (ListView) findViewById(R.id.alarmListView);
