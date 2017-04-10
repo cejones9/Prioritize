@@ -1,4 +1,4 @@
-package com.seniorproject.prioritize;
+//package com.seniorproject.prioritize;
 
 /**
  * Created by shahrukh on 3/11/2017.
@@ -21,34 +21,34 @@ public class JSON{
         //public String that represents the JSON representation
         public String JSONString;
         public String insertIntoSQLite;
-        static SetAlarm newAlarm_Information = new SetAlarm();
+        //static SetAlarm newAlarm_Information = new SetAlarm();
 
         //call the variables
 
-        public JSON(){
-            set_RID(this);
-            set_Description(this);
-            set_Due_Date(this);
-            set_Due_Time(this);
-            set_C_Remind_Date(this);
-            set_C_Remind_Time(this);
-            set_Priority_Val(this);
-            set_Alarm(this);
-            set_On_Time(this);
-            set_Repeatable(this);
-
-            JSONString = ("{" + "\"RID\"" + ":" + this.RID + ","
-                    + "\"Description\"" + ":" + this.Description + ","
-                    + "\"Due_Date\"" + ":" + this.Due_Date + ","
-                    + "\"Due_Time\"" + ":" + this.Due_Time + ","
-                    + "\"C_Remind_Date\"" + ":" + this.C_Remind_Date + ","
-                    + "\"C_Remind_Time\"" + ":" + this.C_Remind_time + ","
-                    + "\"Priority_Val\"" + ":"+ this.Priority_Val + ","
-                    + "\"Alarm\"" + ":" + this.Alarm + ","
-                    + "\"On_Time\"" + ":" + this.On_Time + ","
-                    + "\"Repeatable\"" + ":" + this.Repeatable + ","
-                    + "}");
-
+//        public JSON(){
+//            set_RID(this);
+//            set_Description(this);
+//            set_Due_Date(this);
+//            set_Due_Time(this);
+//            set_C_Remind_Date(this);
+//            set_C_Remind_Time(this);
+//            set_Priority_Val(this);
+//            set_Alarm(this);
+//            set_On_Time(this);
+//            set_Repeatable(this);
+//
+//            JSONString = ("{" + "\"RID\"" + ":" + this.RID + ","
+//                    + "\"Description\"" + ":" + this.Description + ","
+//                    + "\"Due_Date\"" + ":" + this.Due_Date + ","
+//                    + "\"Due_Time\"" + ":" + this.Due_Time + ","
+//                    + "\"C_Remind_Date\"" + ":" + this.C_Remind_Date + ","
+//                    + "\"C_Remind_Time\"" + ":" + this.C_Remind_time + ","
+//                    + "\"Priority_Val\"" + ":"+ this.Priority_Val + ","
+//                    + "\"Alarm\"" + ":" + this.Alarm + ","
+//                    + "\"On_Time\"" + ":" + this.On_Time + ","
+//                    + "\"Repeatable\"" + ":" + this.Repeatable + ","
+//                    + "}");
+//
 
            /* insertIntoSQLite = ("INSERT into Reminder (" + this.RID + ", " + this.Description + ", "
                     + this.Due_date + ", " + this.Due_time + ", " + this.C_Remind_Date + ", " + this.C_Remind_Time +
@@ -62,7 +62,7 @@ public class JSON{
 
 
 
-        }
+     //   }
         
         public JSON(String RID, String Description, String datepicked, String timepicked, String calcdate, String calcTime, 
                 String priorityval, int alarm, int ontime, int repeat){
@@ -76,7 +76,7 @@ public class JSON{
             this.Priority_Val = priorityval;
             this.RID = RID;
             this.Repeatable = repeat;
-                this.JSONString = ("{" + "\"RID\"" + ":" + this.RID + ","
+            this.JSONString = ("{" + "\"RID\"" + ":" + this.RID + ","
                     + "\"Description\"" + ":" + this.Description + ","
                     + "\"Due_Date\"" + ":" + this.Due_Date + ","
                     + "\"Due_Time\"" + ":" + this.Due_Time + ","
@@ -100,7 +100,17 @@ public class JSON{
             this.Priority_Val = null;
             this.RID = null;
             this.Repeatable = i;
-            this.JSONString = null;
+            this.JSONString = ("{" + "\"RID\"" + ":" + this.RID + ","
+                    + "\"Description\"" + ":" + this.Description + ","
+                    + "\"Due_Date\"" + ":" + this.Due_Date + ","
+                    + "\"Due_Time\"" + ":" + this.Due_Time + ","
+                    + "\"C_Remind_Date\"" + ":" + this.C_Remind_Date + ","
+                    + "\"C_Remind_Time\"" + ":" + this.C_Remind_time + ","
+                    + "\"Priority_Val\"" + ":"+ this.Priority_Val + ","
+                    + "\"Alarm\"" + ":" + this.Alarm + ","
+                    + "\"On_Time\"" + ":" + this.On_Time + ","
+                    + "\"Repeatable\"" + ":" + this.Repeatable + ","
+                    + "}");
         }
         
         public static JSON convert_from_string_to_Object(String JSONstring){
@@ -169,6 +179,18 @@ public class JSON{
                 
                 new_JSON.Repeatable = Integer.parseInt(JSONstring.substring(0, repeatComma));
                 
+                new_JSON.JSONString = ("{" + "\"RID\"" + ":" + new_JSON.RID + ","
+                    + "\"Description\"" + ":" + new_JSON.Description + ","
+                    + "\"Due_Date\"" + ":" + new_JSON.Due_Date + ","
+                    + "\"Due_Time\"" + ":" + new_JSON.Due_Time + ","
+                    + "\"C_Remind_Date\"" + ":" + new_JSON.C_Remind_Date + ","
+                    + "\"C_Remind_Time\"" + ":" + new_JSON.C_Remind_time + ","
+                    + "\"Priority_Val\"" + ":"+ new_JSON.Priority_Val + ","
+                    + "\"Alarm\"" + ":" + new_JSON.Alarm + ","
+                    + "\"On_Time\"" + ":" + new_JSON.On_Time + ","
+                    + "\"Repeatable\"" + ":" + new_JSON.Repeatable + ","
+                    + "}");
+                
                 
                 
                 
@@ -184,119 +206,111 @@ public class JSON{
 
     public  String get_RID(){
         //will get the value of RID
-        return null;
+        return this.RID;
     }
 
-    private  void set_RID(JSON a){
-        a.RID = get_RID();
+    public void set_RID(String _RID){
+        this.RID = _RID;
 
     }
 
     public  String get_Description(){
 
         //will get the value of description
-        String description = newAlarm_Information.alarm_Description.getText().toString();
-        return description;
+        
+        return this.Description;
     }
 
-    private  void set_Description(JSON a){
-        a.Description = get_Description();
+    public void set_Description(String _Description){
+        this.Description = _Description;
 
     }
     public  String get_Due_Date(){
 
         //will get the value of Due Date
-        String due_Date = newAlarm_Information.date_Picked();
-        return due_Date;
+       
+        return this.Due_Date;
     }
 
-    private  void set_Due_Date(JSON a){
-        a.Due_Date = get_Due_Date();
+    public void set_Due_Date(String _Due_Date){
+        this.Due_Date = _Due_Date;
 
     }
 
     public  String get_Due_Time(){
 
         //will get the value of Due Time
-        String due_Time = newAlarm_Information.time_Picked();
-        return due_Time;
+        
+        return Due_Time;
     }
 
-    private  void set_Due_Time(JSON a){
-        a.Due_Time = get_Due_Time();
+    public void set_Due_Time(String _Due_Time){
+        this.Due_Time = _Due_Time;
 
     }
     public  String get_C_Remind_Date(){
         //will get the value of Calculated Remind Date
-        return null;
+        return this.C_Remind_Date;
     }
 
-    private  void set_C_Remind_Date(JSON a){
-        a.C_Remind_Date = get_C_Remind_Date();
+    public void set_C_Remind_Date(String _C){
+        this.C_Remind_Date = _C;
 
     }
     public  String get_C_Remind_Time(){
         //will get the value of calculated Remind Time
-        return null;
+        return this.C_Remind_time;
     }
 
-    private  void set_C_Remind_Time(JSON a){
-        a.C_Remind_time = get_C_Remind_Time();
+    private  void set_C_Remind_Time(String _R){
+        this.C_Remind_time = _R;
 
     }
 
     public  String get_Priority_Val(){
 
         //will get the value of priority value
-        int priority_Val = newAlarm_Information.priority_Value;
-        String p_Val =  String.valueOf(priority_Val);
-        return p_Val;
+        return this.Priority_Val;
     }
 
-    private  void set_Priority_Val(JSON a){
-        a.Priority_Val = get_Priority_Val();
+    private  void set_Priority_Val(String _Prio){
+        this.Priority_Val = _Prio;
     }
 
     public  int get_Alarm(){
         //will get the value of alarm
-        int alarm_Type;
-        if (newAlarm_Information.alarm_Type.isChecked() == true) {
-            alarm_Type = 1;
-        } else{
-            alarm_Type=0;}
         
-        return alarm_Type;
+        return this.Alarm;
     }
 
-    private  void set_Alarm(JSON a){
-        a.Alarm = get_Alarm();
+    public  void set_Alarm(int alarm){
+        this.Alarm = alarm;
 
     }
 
     public  int get_On_Time(){
         //will get the value of On_time
-        int on_Time;
-        if (newAlarm_Information.on_Time.isChecked() == true) {
-             on_Time = 1;
-        } else{
-            on_Time = 0;
-        }
-            return on_Time;
+        
+            return this.On_Time;
     }
 
-    private  void set_On_Time(JSON a){
-        a.On_Time = get_On_Time();
+    public  void set_On_Time(int time){
+        this.On_Time = time;
 
     }
 
     public  int get_Repeatable(){
         //will get the value of description
-        return 0;
+        return this.Repeatable;
     }
 
-    private  void set_Repeatable(JSON a){
-        a.Repeatable = get_Repeatable();
+    public  void set_Repeatable(int _r){
+        this.Repeatable = _r;
 
+    }
+    
+    public String get_JSONSTRING(){
+        return this.JSONString;
     }
 
 
