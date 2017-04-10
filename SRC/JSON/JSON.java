@@ -76,6 +76,17 @@ public class JSON{
             this.Priority_Val = priorityval;
             this.RID = RID;
             this.Repeatable = repeat;
+                this.JSONString = ("{" + "\"RID\"" + ":" + this.RID + ","
+                    + "\"Description\"" + ":" + this.Description + ","
+                    + "\"Due_Date\"" + ":" + this.Due_Date + ","
+                    + "\"Due_Time\"" + ":" + this.Due_Time + ","
+                    + "\"C_Remind_Date\"" + ":" + this.C_Remind_Date + ","
+                    + "\"C_Remind_Time\"" + ":" + this.C_Remind_time + ","
+                    + "\"Priority_Val\"" + ":"+ this.Priority_Val + ","
+                    + "\"Alarm\"" + ":" + this.Alarm + ","
+                    + "\"On_Time\"" + ":" + this.On_Time + ","
+                    + "\"Repeatable\"" + ":" + this.Repeatable + ","
+                    + "}");
         }
         
         public JSON(int i){
@@ -89,6 +100,7 @@ public class JSON{
             this.Priority_Val = null;
             this.RID = null;
             this.Repeatable = i;
+            this.JSONString = null;
         }
         
         public static JSON convert_from_string_to_Object(String JSONstring){
