@@ -174,10 +174,6 @@ public class Reminders extends AppCompatActivity implements GoogleApiClient.Conn
         startActivityForResult(addAlarmView, alarmrequestCode);
     }
 
-    public void stopAlarm(View view) {
-        Intent objIntent = new Intent(this, PlayAudio.class);
-        stopService(objIntent);
-    }
     //Snooze
 //    public void snooze(View view) {
 //

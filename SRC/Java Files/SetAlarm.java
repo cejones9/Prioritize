@@ -1,8 +1,6 @@
 package com.seniorproject.prioritize;
 
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,12 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.icu.util.Calendar;
-import android.media.AudioManager;
 import android.os.ParcelFileDescriptor;
-import android.os.Vibrator;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,7 +23,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -38,42 +31,26 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.drive.Drive;
 import com.google.android.gms.drive.DriveApi;
 import com.google.android.gms.drive.DriveContents;
-import com.google.android.gms.drive.DriveFile;
 import com.google.android.gms.drive.DriveFolder;
 import com.google.android.gms.drive.DriveId;
-import com.google.android.gms.drive.DriveResource;
-import com.google.android.gms.drive.ExecutionOptions;
-import com.google.android.gms.drive.MetadataBuffer;
 import com.google.android.gms.drive.MetadataChangeSet;
-import com.google.android.gms.drive.events.ChangeListener;
 import com.google.android.gms.drive.query.Filters;
 import com.google.android.gms.drive.query.Query;
 import com.google.android.gms.drive.query.SearchableField;
-import com.google.android.gms.drive.zzc;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.FilterOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 public class SetAlarm extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
@@ -180,31 +157,12 @@ public class SetAlarm extends AppCompatActivity implements GoogleApiClient.Conne
                 }
                 else   {
                     calendar.set (Calendar.SECOND,0);
-                    Intent push = new Intent(SetAlarm.this, Reminders.class);
-                    PendingIntent pi = PendingIntent.getActivity(SetAlarm.this, getAlarmID(), push,
-                            PendingIntent.FLAG_ONE_SHOT);
 
-                    Context context = SetAlarm.this;
-                    NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.drawable.ic_launcher)
-                            .setContentTitle("Reminder")
-                            .setContentText(alarm_Description.getText())
-                            .setDefaults(Notification.DEFAULT_ALL)
-                            .setPriority(NotificationCompat.PRIORITY_HIGH)
-                            .setAutoCancel(true)
-                            .setWhen(calendar.getTime().getTime())
-                            .setTicker("Reminder")
-                            .setContentIntent(pi);
-                    notificationManager.notify(getAlarmID(), builder.build());
-
-//                    if (calendar.getTimeInMillis()==System.currentTimeMillis()) {
-//                        //Intent addAlarmView = new Intent(SetAlarm.this, MyBroadcastReceiver.class);
-//                        Vibrator v = (Vibrator) SetAlarm.this.getSystemService(Context.VIBRATOR_SERVICE);
-//                        // Vibrate for 500 milliseconds
-//                        v.vibrate(500);
-//                    }
+                    Intent vibIntent = new Intent(SetAlarm.this, MyNotification.class);
+                    PendingIntent pi = PendingIntent.getBroadcast(SetAlarm.this, getAlarmID(), vibIntent, PendingIntent.FLAG_ONE_SHOT);
+                    AlarmManager alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                    alarmMgr.set(AlarmManager.RTC_WAKEUP, calendar.getTime().getTime(), pi);
+//
                 }
 
                 //get int values
