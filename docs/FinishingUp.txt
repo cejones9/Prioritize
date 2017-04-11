@@ -1,0 +1,24 @@
+1]Fix priority alrogithm output (cody)
+
+2]Make Syncing 100% Stable (cody)
+
+3]Change Reminder Creation to an Activity to Activity strategy.  Date Picker activity (lets allow the user to pick 3 separate dates, 
+each date needs to higher than the previous, we can verify this by the save button, if a date does not follow rule then save does 
+nothing but alert the user to the rule), then 1 activity for typing Description and marking the checkboxes and choosing the priority value. 
+
+4]Change priority picker to something else
+
+5]Add calendar activity that has markings on due dates
+
+6]EditReminder: Because we’re changing the way we create the reminder we need to change this strategy. My Suggestion for this is 
+to have an onlick listener for the listview, much like the onlong click. Except onclick we simply go to a new activity that 
+displays all of the information about that particular entry via:
+Description: display in an edit text box. 
+Due Date (1): onclick go to datepicker activity. (preset to currentvalue)
+Due Time (1); onclick go to Timepicker Activity (preset to currentvalue)
+Due Date (2): same strategy but we will display dates 2-3 only if they exist, we can check this from sql, i will make that query.
+Due Time(2): same strategy as stated above:
+Priority Picker preset to currentvalue
+Checkboxes prest to currentvalue
+Repeat value preset to currentvalue: note if more than 1 date is selected, we will simply not allow the user to repeat, finding 
+a repeatable pattern for multiple dates isn’t as important as anything else.
