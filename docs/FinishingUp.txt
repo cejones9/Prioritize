@@ -6,7 +6,7 @@
 each date needs to higher than the previous, we can verify this by the save button, if a date does not follow rule then save does 
 nothing but alert the user to the rule), then 1 activity for typing Description and marking the checkboxes and choosing the priority value. 
 
-4]Change priority picker to something else
+4]Change priority picker to something else (Wajahat)
 
 5]Add calendar activity that has markings on due dates
 
