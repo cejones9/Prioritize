@@ -29,6 +29,7 @@ public class JSON{
         private int On_Time;
         private int Repeatable;
         private int NumDates;
+        private int currday;
 
 
         //public String that represents the JSON representation
@@ -75,7 +76,7 @@ public class JSON{
                 String date2, String time2, String date3, String time3, String date4, 
                 String time4, String date5, String time5, String date6, String time6,
                 String date7, String time7, String calcdate, String calcTime, 
-                String priorityval, int alarm, int ontime, int repeat, int dates){
+                String priorityval, int alarm, int ontime, int repeat, int dates, int currd){
             
             this.Alarm = alarm;
             this.C_Remind_Date = calcdate;
@@ -100,6 +101,7 @@ public class JSON{
             this.RID = RID;
             this.Repeatable = repeat;
             this.NumDates = dates;
+            this.currday = currd;
             this.JSONString = ("{" + "\"RID\"" + ":" + this.RID + ","
                     + "\"Description\"" + ":" + this.Description + ","
                     + "\"Due_Date\"" + ":" + this.Due_Date + ","
@@ -123,6 +125,7 @@ public class JSON{
                     + "\"On_Time\"" + ":" + this.On_Time + ","
                     + "\"Repeatable\"" + ":" + this.Repeatable + ","
                     + "\"Num_Dates\"" + ":" + this.NumDates + ","
+                    + "\"CurrDay\"" + ":" + this.currday + ","
                     + "}");
         }
         
@@ -150,6 +153,7 @@ public class JSON{
             this.RID = null;
             this.Repeatable = i;
             this.NumDates = 0;
+            this.currday = 0;
            this.JSONString = ("{" + "\"RID\"" + ":" + this.RID + ","
                     + "\"Description\"" + ":" + this.Description + ","
                     + "\"Due_Date\"" + ":" + this.Due_Date + ","
@@ -173,6 +177,7 @@ public class JSON{
                     + "\"On_Time\"" + ":" + this.On_Time + ","
                     + "\"Repeatable\"" + ":" + this.Repeatable + ","
                     + "\"Num_Dates\"" + ":" + this.NumDates + ","
+                    + "\"CurrDay\"" + ":" + this.currday + ","
                     + "}");
         }
         
@@ -306,7 +311,10 @@ public class JSON{
                 int numdatesComma = JSONstring.indexOf(",");
                 new_JSON.NumDates = Integer.parseInt(JSONstring.substring(0, numdatesComma));
                 
-                
+                int currdayColon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(currdayColon+1);
+                int currdayComma = JSONstring.indexOf(",");
+                new_JSON.currday = Integer.parseInt(JSONstring.substring(0, currdayComma));
                 
                 
                 new_JSON.JSONString = ("{" + "\"RID\"" + ":" + new_JSON.RID + ","
@@ -332,6 +340,7 @@ public class JSON{
                     + "\"On_Time\"" + ":" + new_JSON.On_Time + ","
                     + "\"Repeatable\"" + ":" + new_JSON.Repeatable + ","
                     + "\"Num_Dates\"" + ":" + new_JSON.NumDates + ","
+                    + "\"CurrDAy\"" + ":" + new_JSON.currday + ","
                     + "}");
                 
                 
@@ -578,6 +587,16 @@ public class JSON{
     public  void set_Repeatable(int _r){
         this.Repeatable = _r;
 
+    }
+    
+    public int get_curr_day(){
+        
+        return this.currday;
+        
+    }
+    
+    public void set_curr_day(int curr){
+        this.currday = curr;
     }
     
     public String get_JSONSTRING(){
