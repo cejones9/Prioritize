@@ -10,17 +10,30 @@ public class JSON{
         private String Description;
         private String Due_Date;
         private String Due_Time;
+        private String Due_Date2;
+        private String Due_Time2;
+        private String Due_Date3;
+        private String Due_Time3;
+        private String Due_Date4;
+        private String Due_Time4;
+        private String Due_Date5;
+        private String Due_Time5;
+        private String Due_Date6;
+        private String Due_Time6;
+        private String Due_Date7;
+        private String Due_Time7;
         private String C_Remind_Date;
         private String C_Remind_time;
         private String Priority_Val;
         private int Alarm;
         private int On_Time;
         private int Repeatable;
+        private int NumDates;
 
 
         //public String that represents the JSON representation
         public String JSONString;
-        public String insertIntoSQLite;
+        
         //static SetAlarm newAlarm_Information = new SetAlarm();
 
         //call the variables
@@ -50,13 +63,7 @@ public class JSON{
 //                    + "}");
 //
 
-           /* insertIntoSQLite = ("INSERT into Reminder (" + this.RID + ", " + this.Description + ", "
-                    + this.Due_date + ", " + this.Due_time + ", " + this.C_Remind_Date + ", " + this.C_Remind_Time +
-                    ", " + this.Priority_Val + ", " + this.Alarm.toString() + ", " + this.On_Time.toString() + ", " + this.Repeatable + ")");
-                String insertIntoSQLite = "INSERT into Reminder (" +this.RID+", "
-                   + this.Description + ", " + ....
-                */
-
+       
 
 
 
@@ -64,28 +71,58 @@ public class JSON{
 
      //   }
         
-        public JSON(String RID, String Description, String datepicked, String timepicked, String calcdate, String calcTime, 
-                String priorityval, int alarm, int ontime, int repeat){
+        public JSON(String RID, String Description, String datepicked, String timepicked, 
+                String date2, String time2, String date3, String time3, String date4, 
+                String time4, String date5, String time5, String date6, String time6,
+                String date7, String time7, String calcdate, String calcTime, 
+                String priorityval, int alarm, int ontime, int repeat, int dates){
+            
             this.Alarm = alarm;
             this.C_Remind_Date = calcdate;
             this.C_Remind_time = calcTime;
             this.Description = Description;
             this.Due_Date = datepicked;
             this.Due_Time = timepicked;
+            this.Due_Date2 = date2;
+            this.Due_Date3 = date3;
+            this.Due_Date4 = date4;
+            this.Due_Date5 = date5;
+            this.Due_Date6 = date6;
+            this.Due_Date7 = date7;
+            this.Due_Time2 = time2;
+            this.Due_Time3 = time3;
+            this.Due_Time4 = time4;
+            this.Due_Time5 = time5;
+            this.Due_Time6 = time6;
+            this.Due_Time7 = time7;
             this.On_Time = ontime;
             this.Priority_Val = priorityval;
             this.RID = RID;
             this.Repeatable = repeat;
+            this.NumDates = dates;
             this.JSONString = ("{" + "\"RID\"" + ":" + this.RID + ","
                     + "\"Description\"" + ":" + this.Description + ","
                     + "\"Due_Date\"" + ":" + this.Due_Date + ","
                     + "\"Due_Time\"" + ":" + this.Due_Time + ","
+                    + "\"Due_Date2\"" + ":" + this.Due_Date2 + ","
+                    + "\"Due_Time2\"" + ":" + this.Due_Time2 + ","
+                    + "\"Due_Date3\"" + ":" + this.Due_Date3 + ","
+                    + "\"Due_Time3\"" + ":" + this.Due_Time3 + ","
+                    + "\"Due_Date4\"" + ":" + this.Due_Date4 + ","
+                    + "\"Due_Time4\"" + ":" + this.Due_Time4 + ","
+                    + "\"Due_Date5\"" + ":" + this.Due_Date5 + ","
+                    + "\"Due_Time5\"" + ":" + this.Due_Time5 + ","
+                    + "\"Due_Date6\"" + ":" + this.Due_Date6 + ","
+                    + "\"Due_Time6\"" + ":" + this.Due_Time6 + ","
+                    + "\"Due_Date7\"" + ":" + this.Due_Date7 + ","
+                    + "\"Due_Time7\"" + ":" + this.Due_Time7 + ","
                     + "\"C_Remind_Date\"" + ":" + this.C_Remind_Date + ","
                     + "\"C_Remind_Time\"" + ":" + this.C_Remind_time + ","
                     + "\"Priority_Val\"" + ":"+ this.Priority_Val + ","
                     + "\"Alarm\"" + ":" + this.Alarm + ","
                     + "\"On_Time\"" + ":" + this.On_Time + ","
                     + "\"Repeatable\"" + ":" + this.Repeatable + ","
+                    + "\"Num_Dates\"" + ":" + this.NumDates + ","
                     + "}");
         }
         
@@ -96,20 +133,46 @@ public class JSON{
             this.Description = null;
             this.Due_Date = null;
             this.Due_Time = null;
+            this.Due_Date2 = null;
+            this.Due_Date3 = null;
+            this.Due_Date4 = null;
+            this.Due_Date5 = null;
+            this.Due_Date6 = null;
+            this.Due_Date7 = null;
+            this.Due_Time2 = null;
+            this.Due_Time3 = null;
+            this.Due_Time4 = null;
+            this.Due_Time5 = null;
+            this.Due_Time6 = null;
+            this.Due_Time7 = null;
             this.On_Time = 0;
             this.Priority_Val = null;
             this.RID = null;
             this.Repeatable = i;
-            this.JSONString = ("{" + "\"RID\"" + ":" + this.RID + ","
+            this.NumDates = 0;
+           this.JSONString = ("{" + "\"RID\"" + ":" + this.RID + ","
                     + "\"Description\"" + ":" + this.Description + ","
                     + "\"Due_Date\"" + ":" + this.Due_Date + ","
                     + "\"Due_Time\"" + ":" + this.Due_Time + ","
+                    + "\"Due_Date2\"" + ":" + this.Due_Date2 + ","
+                    + "\"Due_Time2\"" + ":" + this.Due_Time2 + ","
+                    + "\"Due_Date3\"" + ":" + this.Due_Date3 + ","
+                    + "\"Due_Time3\"" + ":" + this.Due_Time3 + ","
+                    + "\"Due_Date4\"" + ":" + this.Due_Date4 + ","
+                    + "\"Due_Time4\"" + ":" + this.Due_Time4 + ","
+                    + "\"Due_Date5\"" + ":" + this.Due_Date5 + ","
+                    + "\"Due_Time5\"" + ":" + this.Due_Time5 + ","
+                    + "\"Due_Date6\"" + ":" + this.Due_Date6 + ","
+                    + "\"Due_Time6\"" + ":" + this.Due_Time6 + ","
+                    + "\"Due_Date7\"" + ":" + this.Due_Date7 + ","
+                    + "\"Due_Time7\"" + ":" + this.Due_Time7 + ","
                     + "\"C_Remind_Date\"" + ":" + this.C_Remind_Date + ","
                     + "\"C_Remind_Time\"" + ":" + this.C_Remind_time + ","
                     + "\"Priority_Val\"" + ":"+ this.Priority_Val + ","
                     + "\"Alarm\"" + ":" + this.Alarm + ","
                     + "\"On_Time\"" + ":" + this.On_Time + ","
                     + "\"Repeatable\"" + ":" + this.Repeatable + ","
+                    + "\"Num_Dates\"" + ":" + this.NumDates + ","
                     + "}");
         }
         
@@ -137,6 +200,66 @@ public class JSON{
                 JSONstring = JSONstring.substring(DueTimeColon+1);
                 int DueTimeComma = JSONstring.indexOf(",");
                 new_JSON.Due_Time = JSONstring.substring(0, DueTimeComma);
+                
+                int DueDate2Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueDate2Colon+1);
+                int DueDate2Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Date2 = JSONstring.substring(0, DueDate2Comma);
+                
+                int DueTime2Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueTime2Colon+1);
+                int DueTime2Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Time2 = JSONstring.substring(0, DueTime2Comma);
+                
+                int DueDate3Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueDate3Colon+1);
+                int DueDate3Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Date3 = JSONstring.substring(0, DueDate3Comma);
+                
+                int DueTime3Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueTime3Colon+1);
+                int DueTime3Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Time3 = JSONstring.substring(0, DueTime3Comma);
+                
+                int DueDate4Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueDate4Colon+1);
+                int DueDate4Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Date4 = JSONstring.substring(0, DueDate4Comma);
+                
+                int DueTime4Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueTime4Colon+1);
+                int DueTime4Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Time4 = JSONstring.substring(0, DueTime4Comma);
+                
+                int DueDate5Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueDate5Colon+1);
+                int DueDate5Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Date5 = JSONstring.substring(0, DueDate5Comma);
+                
+                int DueTime5Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueTime5Colon+1);
+                int DueTime5Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Time5 = JSONstring.substring(0, DueTime5Comma);
+                
+                int DueDate6Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueDate6Colon+1);
+                int DueDate6Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Date6 = JSONstring.substring(0, DueDate6Comma);
+                
+                int DueTime6Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueTime6Colon+1);
+                int DueTime6Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Time6 = JSONstring.substring(0, DueTime6Comma);
+                
+                int DueDate7Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueDate7Colon+1);
+                int DueDate7Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Date7 = JSONstring.substring(0, DueDate7Comma);
+                
+                int DueTime7Colon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(DueTime7Colon+1);
+                int DueTime7Comma = JSONstring.indexOf(",");
+                new_JSON.Due_Time7 = JSONstring.substring(0, DueTime7Comma);
                 
                 int C_DateColon = JSONstring.indexOf(":");
                 JSONstring = JSONstring.substring(C_DateColon+1);
@@ -176,19 +299,39 @@ public class JSON{
                 int repeatColon = JSONstring.indexOf(":");
                 JSONstring = JSONstring.substring(repeatColon+1);
                 int repeatComma = JSONstring.indexOf(",");
-                
                 new_JSON.Repeatable = Integer.parseInt(JSONstring.substring(0, repeatComma));
+                
+                int numdatesColon = JSONstring.indexOf(":");
+                JSONstring = JSONstring.substring(numdatesColon+1);
+                int numdatesComma = JSONstring.indexOf(",");
+                new_JSON.NumDates = Integer.parseInt(JSONstring.substring(0, numdatesComma));
+                
+                
+                
                 
                 new_JSON.JSONString = ("{" + "\"RID\"" + ":" + new_JSON.RID + ","
                     + "\"Description\"" + ":" + new_JSON.Description + ","
                     + "\"Due_Date\"" + ":" + new_JSON.Due_Date + ","
                     + "\"Due_Time\"" + ":" + new_JSON.Due_Time + ","
+                    + "\"Due_Date2\"" + ":" + new_JSON.Due_Date2 + ","
+                    + "\"Due_Time2\"" + ":" + new_JSON.Due_Time2 + ","
+                    + "\"Due_Date3\"" + ":" + new_JSON.Due_Date3 + ","
+                    + "\"Due_Time3\"" + ":" + new_JSON.Due_Time3 + ","
+                    + "\"Due_Date4\"" + ":" + new_JSON.Due_Date4 + ","
+                    + "\"Due_Time4\"" + ":" + new_JSON.Due_Time4 + ","
+                    + "\"Due_Date5\"" + ":" + new_JSON.Due_Date5 + ","
+                    + "\"Due_Time5\"" + ":" + new_JSON.Due_Time5 + ","
+                    + "\"Due_Date6\"" + ":" + new_JSON.Due_Date6 + ","
+                    + "\"Due_Time6\"" + ":" + new_JSON.Due_Time6 + ","
+                    + "\"Due_Date7\"" + ":" + new_JSON.Due_Date7 + ","
+                    + "\"Due_Time7\"" + ":" + new_JSON.Due_Time7 + ","
                     + "\"C_Remind_Date\"" + ":" + new_JSON.C_Remind_Date + ","
                     + "\"C_Remind_Time\"" + ":" + new_JSON.C_Remind_time + ","
                     + "\"Priority_Val\"" + ":"+ new_JSON.Priority_Val + ","
                     + "\"Alarm\"" + ":" + new_JSON.Alarm + ","
                     + "\"On_Time\"" + ":" + new_JSON.On_Time + ","
                     + "\"Repeatable\"" + ":" + new_JSON.Repeatable + ","
+                    + "\"Num_Dates\"" + ":" + new_JSON.NumDates + ","
                     + "}");
                 
                 
@@ -236,6 +379,70 @@ public class JSON{
         this.Due_Date = _Due_Date;
 
     }
+    public  String get_Due_Date2(){
+
+        //will get the value of Due Date
+       
+        return this.Due_Date2;
+    }
+
+    public void set_Due_Date2(String _Due_Date){
+        this.Due_Date2 = _Due_Date;
+
+    }
+    
+    
+    public  String get_Due_Date3(){
+
+        //will get the value of Due Date
+       
+        return this.Due_Date3;
+    }
+
+    public void set_Due_Date3(String _Due_Date){
+        this.Due_Date3 = _Due_Date;
+
+    }public  String get_Due_Date4(){
+
+        //will get the value of Due Date
+       
+        return this.Due_Date4;
+    }
+
+    public void set_Due_Date4(String _Due_Date){
+        this.Due_Date4 = _Due_Date;
+
+    }public  String get_Due_Date5(){
+
+        //will get the value of Due Date
+       
+        return this.Due_Date5;
+    }
+
+    public void set_Due_Date5(String _Due_Date){
+        this.Due_Date5 = _Due_Date;
+
+    }public  String get_Due_Date6(){
+
+        //will get the value of Due Date
+       
+        return this.Due_Date6;
+    }
+
+    public void set_Due_Date6(String _Due_Date){
+        this.Due_Date6 = _Due_Date;
+
+    }public  String get_Due_Date7(){
+
+        //will get the value of Due Date
+       
+        return this.Due_Date7;
+    }
+
+    public void set_Due_Date7(String _Due_Date){
+        this.Due_Date7 = _Due_Date;
+
+    }
 
     public  String get_Due_Time(){
 
@@ -248,6 +455,70 @@ public class JSON{
         this.Due_Time = _Due_Time;
 
     }
+    
+    public  String get_Due_Time2(){
+
+        //will get the value of Due Time
+        
+        return Due_Time2;
+    }
+
+    public void set_Due_Time2(String _Due_Time){
+        this.Due_Time2 = _Due_Time;
+
+    }public  String get_Due_Time3(){
+
+        //will get the value of Due Time
+        
+        return Due_Time3;
+    }
+
+    public void set_Due_Time3(String _Due_Time){
+        this.Due_Time3 = _Due_Time;
+
+    }public  String get_Due_Time4(){
+
+        //will get the value of Due Time
+        
+        return Due_Time4;
+    }
+
+    public void set_Due_Time4(String _Due_Time){
+        this.Due_Time4 = _Due_Time;
+
+    }public  String get_Due_Time5(){
+
+        //will get the value of Due Time
+        
+        return Due_Time5;
+    }
+
+    public void set_Due_Time5(String _Due_Time){
+        this.Due_Time5 = _Due_Time;
+
+    }public  String get_Due_Time6(){
+
+        //will get the value of Due Time
+        
+        return Due_Time6;
+    }
+
+    public void set_Due_Time6(String _Due_Time){
+        this.Due_Time6 = _Due_Time;
+
+    }public  String get_Due_Time7(){
+
+        //will get the value of Due Time
+        
+        return Due_Time7;
+    }
+
+    public void set_Due_Time7(String _Due_Time){
+        this.Due_Time7 = _Due_Time;
+
+    }
+    
+    
     public  String get_C_Remind_Date(){
         //will get the value of Calculated Remind Date
         return this.C_Remind_Date;
