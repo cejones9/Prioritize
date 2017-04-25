@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_color"
+    tools:context="com.seniorproject.prioritize.PickTime">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/myLinearView"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/date1text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:text="At what time?" />
+
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentStart="true"
+                android:id="@+id/timePicker1" />
+
+            <TextView
+                android:id="@+id/date2text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.02"
+                android:text="At what time for: "
+
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:visibility="invisible" />
+
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/timePicker1"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/timePicker2" />
+
+            <TextView
+                android:id="@+id/date3text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible"
+
+                android:textSize="20dp"
+                android:text="At what time for: " />
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/timePicker2"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/timePicker3" />
+
+            <TextView
+                android:id="@+id/date4text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible"
+
+                android:textSize="20dp"
+                android:text="At what time for: " />
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/timePicker3"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/timePicker4" />
+
+            <TextView
+                android:id="@+id/date5text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible"
+
+                android:textSize="20dp"
+                android:text="At what time for: " />
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/timePicker4"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/timePicker5" />
+
+            <TextView
+                android:id="@+id/date6text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible"
+
+                android:textSize="20dp"
+                android:text="At what time for: " />
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/timePicker5"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/timePicker6" />
+
+            <TextView
+                android:id="@+id/date7text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible"
+
+                android:textSize="20dp"
+                android:text="At what time for: " />
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/timePicker6"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/timePicker7" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Time(s)"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:gravity="left"
+            android:id="@+id/newTimePicker"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remove Time(s)"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:gravity="left"
+            android:visibility="invisible"
+            android:id="@+id/removeTimePicker"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:clickable="true"
+            android:textAlignment="center"
+            android:gravity="right"
+            android:id="@+id/thirdScreen"/>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

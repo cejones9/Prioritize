@@ -13,24 +13,24 @@
     tools:context="com.seniorproject.prioritize.Reminders">
 
 
+    <TextView
+        android:id="@+id/noReminders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You have no active Reminders"
+        android:visibility="invisible"
+        android:textSize="18dp"
+        android:layout_centerHorizontal="true"
+        />
+
+
+
     <ListView
         android:id="@+id/alarmListView"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:clickable="true"-->
-        <!--android:onClick="snooze"-->
-        <!--app:srcCompat="@android:drawable/ic_input_add"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginBottom="15dp"-->
-        <!--android:radius="20dp"-->
-        <!--android:text="Snooze"-->
-        <!--android:id="@+id/SnoozeButton" />-->
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

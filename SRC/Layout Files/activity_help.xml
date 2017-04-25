@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_color"
+
+    tools:context="com.seniorproject.prioritize.Help">
+
+    <ScrollView android:id="@+id/textAreaScroller"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_x="0px"
+        android:layout_y="25px"
+        android:scrollbars="vertical">
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:text="Creating a Reminder: \n
+1) Hit the button at the bottom right corner.\n\n
+2) Choose a date, or several dates (up to seven). \n\n
+3) Choose a time, you have two options:\n
+    a) Choose one specific time for all dates.\n
+    b) Choose a unique time for each date. \n\n
+4) Set a description the your Reminder.\n\n
+5) Set a priority level, the higher the priority, the earlier you will be alerted to it.\n\n
+6) Consider extra settings:\n
+    a) Aggressive alert: This type of alert will ring until you interact with the notification. Otherwise we will alert only with a small tone.\n
+    b) Ignore Prioritized Alert Time: If you want to be alerted at the time that you designated and not before then, this is your option.\n
+    c) Repeat Pattern: This is restricted to only being allowed if you have only 1 date. You can set it to repeat every day, week, month, or year.\n\n
+Handling Alerts:\n
+When Prioritize alerts you, you have 3 options:\n
+1) Snooze: Prioritize will alert you of the task again in 30 minutes. This is good if you want get to completing task around the time we alerted you, just not at that moment.\n
+2) Reminder Me Later: The earlier we alert you to something, the more time there is between your deadline and the time that we alerted you. This will recalculate another alert time in the future which is again based on the priority you chose and the distance to the deadline. This is the main function of Prioritize to keep you reminded of the things you need to be kept reminded of.\n
+3) End: This is your option if you have already taken care of the task or simply don’t want to be alerted to it again. This will end the alert(s) and delete the Reminder.\n" />
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

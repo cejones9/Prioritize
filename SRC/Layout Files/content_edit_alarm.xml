@@ -18,50 +18,55 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentStart="true"
+                android:id="@+id/datePicker" />
+
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/datePicker"
+                android:layout_alignParentStart="true"
+                android:id="@+id/timePicker" />
+
             <EditText
-                android:id="@+id/descriptionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/priorityBar"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:layout_marginTop="20dp"
                 android:hint="Description"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp" />
+                android:layout_below="@+id/descriptionTitleTextView"
+                android:id="@+id/descriptionText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-
-                <TextView
-                    android:id="@+id/priorityText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Priority Level: "
-                    android:textSize="23sp" />
-
-                <TextView
-                    android:id="@+id/priorityInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="1"
-                    android:textSize="23sp" />
-            </LinearLayout>
-
-            <SeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_below="@+id/priorityText"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:id="@+id/priorityBar"/>
+                android:orientation="horizontal">
 
+                <TextView
+
+                    android:text="Priority"
+                    android:textSize="12pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_weight="1"/>
+                <Spinner
+                    android:id="@+id/priorityDropDown"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_marginTop="40dp"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,13 +77,13 @@
                 android:id="@+id/alarmTypeLinearView">
 
                 <TextView
-                    android:id="@+id/alarmTypeTextView"
+                    android:text="Continuous Alert:"
+                    android:textSize="12pt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_weight="1"
-                    android:text="Continuous Alert:"
-                    android:textSize="18sp" />
+                    android:id="@+id/alarmTypeTextView" />
 
                 <CheckBox
                     android:layout_width="wrap_content"
@@ -95,13 +100,13 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/onTimeTextView"
+                    android:text="Ignore prioritized alert time:"
+                    android:textSize="12pt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_weight="1"
-                    android:text="Ignore prioritized alert time:"
-                    android:textSize="18sp" />
+                    android:id="@+id/onTimeTextView" />
 
 
                 <CheckBox
@@ -110,30 +115,6 @@
                     android:layout_marginTop="30dp"
                     android:id="@+id/onTimeCheckBox" />
 
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:orientation="horizontal">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="40dp"
-                    android:layout_weight="0.78"
-                    android:text="Repeat Pattern:"
-                    android:textSize="18sp" />
-                <Spinner
-                    android:id="@+id/repeatDropDown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:layout_marginTop="40dp"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <Button

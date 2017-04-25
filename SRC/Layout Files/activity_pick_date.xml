@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_color"
+    tools:context="com.seniorproject.prioritize.PickDate">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/date1text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:text="Date 1" />
+
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentStart="true"
+                android:id="@+id/datePicker1" />
+
+            <TextView
+                android:id="@+id/date2text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible"
+                android:textSize="20dp"
+                android:text="Date 2" />
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/datePicker1"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/datePicker2" />
+
+            <TextView
+                android:id="@+id/date3text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible"
+                android:textSize="20dp"
+                android:text="Date 3" />
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/datePicker2"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/datePicker3" />
+
+            <TextView
+                android:id="@+id/date4text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible"
+                android:textSize="20dp"
+                android:text="Date 4" />
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/datePicker3"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/datePicker4" />
+
+            <TextView
+                android:id="@+id/date5text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible"
+                android:textSize="20dp"
+                android:text="Date 5" />
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/datePicker4"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/datePicker5" />
+
+            <TextView
+                android:id="@+id/date6text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible"
+                android:textSize="20dp"
+                android:text="Date 6" />
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/datePicker5"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/datePicker6" />
+
+            <TextView
+                android:id="@+id/date7text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible"
+                android:textSize="20dp"
+                android:text="Date 7" />
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/datePicker6"
+                android:layout_marginTop="30dp"
+                android:visibility="invisible"
+                android:id="@+id/datePicker7" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Date"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:gravity="left"
+            android:id="@+id/newDatePicker"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remove Date"
+            android:clickable="true"
+            android:textAlignment="center"
+            android:gravity="left"
+            android:visibility="invisible"
+            android:id="@+id/removeDatePicker"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:clickable="true"
+            android:textAlignment="center"
+            android:gravity="right"
+            android:id="@+id/timePickerScreen"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_set_alarm"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_color"
-    tools:context="com.seniorproject.prioritize.SetAlarm">
+    tools:context="com.seniorproject.prioritize.editReminder">
+
+
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1"
+        android:id="@+id/scrollView2">
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <EditText
                 android:id="@+id/descriptionText"
@@ -31,8 +46,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="20dp"
+                android:orientation="horizontal"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp">
 
@@ -42,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Priority Level: "
-                    android:textSize="23sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/priorityInfo"
@@ -50,19 +65,30 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="1"
-                    android:textSize="23sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <SeekBar
+                android:id="@+id/priorityBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:layout_below="@+id/priorityText"
+                android:layout_marginTop="40dp"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:id="@+id/priorityBar"/>
+                android:paddingRight="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\nDeadline(s):"
+                android:textSize="18sp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"/>
 
+            <ListView
+                android:id="@+id/reminderDates"
 
+                android:layout_width="match_parent"
+                android:layout_height="144dp"></ListView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,12 +137,13 @@
                     android:id="@+id/onTimeCheckBox" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:orientation="horizontal">
+                android:paddingRight="20dp">
 
                 <TextView
 
@@ -126,27 +153,36 @@
                     android:layout_weight="0.78"
                     android:text="Repeat Pattern:"
                     android:textSize="18sp" />
+
                 <Spinner
                     android:id="@+id/repeatDropDown"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:layout_marginTop="40dp"
                     android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown" />
+                    android:spinnerMode="dropdown"
+                    android:textAlignment="center" />
             </LinearLayout>
-
             <Button
-                android:text="Save"
+                android:id="@+id/alarmSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:clickable="true"
-                android:onClick="saveNewAlarm"
                 android:layout_below="@+id/checkBox"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/alarmSave" />
+                android:clickable="true"
+                android:onClick="saveNewAlarm"
+                android:text="Save"
+                android:layout_weight="0.01"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
 
         </LinearLayout>
+
     </ScrollView>
-</RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
