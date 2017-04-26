@@ -68,20 +68,23 @@ As shown in Fig. 1, a brief overview of the system is shown. The Reminder Databa
 
 \section{Subsystems}
 \subsection{Home Activity}
-The Home Activity is a fragment system for activity to display the current list of reminders on one slide. Swiping right reveals a calendar with reminders marked on dates. Clicking the "Add" button will prompt the user to create a new Reminder.
+The Home Activity is a fragment system for activity to display the current list of reminders on one slide. Swiping right reveals a calendar with reminders marked on dates. Clicking the "Add" button will prompt the user to create a new Reminder. This is the responsibility of Shahrukh. 
 
 \subsection{Notifications}
-The notifications portion of Prioritize reminds the user of the task depending on the priority set by the user. This happens through sending a notification via an alert or an alarm.  Notifications will offer Snooze, Remind Me Later, and Stop Reminding Me options.
+The notifications portion of Prioritize reminds the user of the task depending on the priority set by the user. This happens through sending a notification via an alert or an alarm.  Notifications will offer Snooze, Remind Me Later, and Stop Reminding Me options. This is the responsibility of Wajahat.
 
 \subsection{Reminder Database}
-The Reminder Database manages the user's reminders. Written in SQLite, this database is synced with the cloud so that the user's other Android devices can share all of the same information.
+The Reminder Database manages the user's reminders. Written in SQLite, this database is synced with the cloud so that the user's other Android devices can share all of the same information. This is the responsbility of Cody.
 
 
 \subsection{Priority Algorithm}
-The meat behind Prioritize, the Priority Algorithm will select the date and time for the user to be alerted, regarding to the task they created a reminder for. It takes the time between the date of creation and the "due-date" to set a new date based on the percentage of time between the two. 
+The meat behind Prioritize, the Priority Algorithm will select the date and time for the user to be alerted, regarding to the task they created a reminder for. It takes the time between the date of creation and the "due-date" to set a new date based on the percentage of time between the two. This is a responsibility of Cody.
+
+\subsection{Google Drive Syncing}
+After considering between using Firebase by Google, we decided to use the Google Drive Android API to store the users data across their android devices. The user should only have to login to their account to view entries that they have previously made. This is Cody's responsibility.
 
 \subsection{GUI}
-Similar to the Home Activity, the GUI encompasses everything the user sees and interacts with. It provides the user with a menu, buttons, options to create a new Reminder, edit old Reminders, a calendar to view when Reminders are due, and so much more. In short, it is the face of Prioritize. Shown in Figure 2 is a visual representation of the GUI dataflow.
+Similar to the Home Activity, the GUI encompasses everything the user sees and interacts with. It provides the user with a menu, buttons, options to create a new Reminder, edit old Reminders, a calendar to view when Reminders are due, and so much more. In short, it is the face of Prioritize. Shown in Figure 2 is a visual representation of the GUI dataflow. This is Shahrukh's responsibility.
 
 \begin{figure}[h]
 \includegraphics[width=8cm]{GuiSubsystem.png}
@@ -90,7 +93,7 @@ Similar to the Home Activity, the GUI encompasses everything the user sees and i
 \end{figure}
 
 \subsection{Adding a Reminder}
-The Add Reminder activity is a system for the user to create a Reminder to be added to the Reminder database. Has field for Reminder description, date picker, time picker, repeatable check, alert/alarm switch, and the option for ignoring priority system. Shown in Figure 3 is a visual representation of the process of creating a new Reminder.
+The Add Reminder activity is a system for the user to create a Reminder to be added to the Reminder database. Has field for Reminder description, date picker, time picker, repeatable check, alert/alarm switch, and the option for ignoring priority system. Shown in Figure 3 is a visual representation of the process of creating a new Reminder. This is Shahrukh's responsibility.
 
 \begin{figure}[h]
 \includegraphics[width=8cm]{ReminderCreation.png}
