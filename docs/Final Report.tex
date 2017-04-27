@@ -59,32 +59,58 @@ The user's Reminders must not be available for viewing by anyone other than the 
 When user creates a Reminder a description is set by the user, a date (or dates)  are set by the user, a time is optionally set by the user, a priority value is set via a slider, and the user has options for ignoring the priority system, setting it to be repeatable, and changing from the default alert style to an alarm style notification. Once the reminder is submitted, the priority algorithm takes the priority value, the current date and time, and the due date and time of the Reminder, and calculates a date and time for the user to be reminded based on the percentage of time between the two dates. The information the user entered and the new priority date is saved in a local device database, and is synced with the user's Google Cloud via the Google Drive API. This allows for the user's other android devices that have the application installed under the same account to sync with the Cloud and set the reminder on that system as well. The alerts are set via the Android system which lets the application be closed until the time of activation of the event.
 
 \begin{figure}[h]
-\includegraphics[width=8cm]{SystemOverview1.png}
+\includegraphics[width=15cm]{SystemDiagram.png}
 \centering
 \caption{A brief system overview}
 \end{figure}
 
-As shown in Fig. 1, a brief overview of the system is shown. The Reminder Database, implemented in SQLite, is stored locally on the device. Information from the Database is shown in the GUI. The GUI is used to create new Reminders, which are then stored in the Google Drive folder, as well as the SQLite folder.
+As shown in Fig. 1, a brief overview of the system is shown. The Reminder Database, implemented in SQLite, is stored locally on the device. Information from the Database is shown in the GUI. The GUI is used to create new Reminders, which are then stored in the Google Drive folder, as well as the SQLite folder. The JSON class will take values needed to create and load a Reminder, and will convert them into a JSON String format, to store in the Google Drive. It will then parse through that string when loaded, and allow the application to use the information. 
 
 \section{Subsystems}
 \subsection{Home Activity - Shahrukh Rehman}
-The Home Activity is a fragment system for activity to display the current list of reminders on one slide. Swiping right reveals a calendar with reminders marked on dates. Clicking the "Add" button will prompt the user to create a new Reminder. This is the responsibility of Shahrukh. 
+The Home Activity is a fragment system for activity to display the current list of reminders on one slide. Swiping right reveals a calendar with reminders marked on dates. Clicking the "Add" button will prompt the user to create a new Reminder. 
 
 \subsection{Notifications - Wajahat Iqbal}
-The notifications portion of Prioritize reminds the user of the task depending on the priority set by the user. This happens through sending a notification via an alert or an alarm.  Notifications will offer Snooze, Remind Me Later, and Stop Reminding Me options. This is the responsibility of Wajahat.
+The notifications portion of Prioritize reminds the user of the task depending on the priority set by the user. This happens through sending a notification via an alert or an alarm.  Notifications will offer Snooze, Remind Me Later, and Stop Reminding Me options. 
 
 \subsection{SQLite Database - Cody Jones}
-The SQLite Database manages the user's reminders. The database contains a single tablem, called Reminder. This database is synced with the cloud so that the user's other Android devices can share all of the same information. Because we are dealing with Reminders as a single entry we opted to avoid using standard SQL databse normalization. All information regarding the Reminder is stored in this local database. 
+The SQLite Database manages the user's reminders. The database contains a single table, called Reminder. This database is synced with the cloud so that the user's other Android devices can share all of the same information. Because we are dealing with Reminders as a single entry we opted to avoid using standard SQL databse normalization. All information regarding the Reminder is stored in this local database. 
 
 
-\subsection{Priority Algorithm -Cody Jones}
-The meat behind Prioritize, the Priority Algorithm will select the date and time for the user to be alerted, regarding to the task they created a reminder for. It takes the time between the date of creation and the "due-date" to set a new date based on the percentage of time between the two. The use picks a priority integer randing from 1 to 5 (low to high priority). Each level corresponds to a specific meaning; 1 - Unimportant, 2 - Semi Important, 3 - Important, 4 - Very Important, 5 - Crucial. The higher the priority level the sooner the initial alert of the reminder will be. Upon saving the Reminder, the time (or number of days and hours) between the time of creation and the deadline is computed. Based on the priority level and the amount of time between the two dates, we construct an amount of time that signifies when the user should be alerted. That amount of time is incremented into a valid date and time and the notifcation is then set for that time. 
+\subsection{Priority Algorithm - Cody Jones}
+The meat behind Prioritize, the Priority Algorithm will select the date and time for the user to be alerted, regarding to the task they created a reminder for. It takes the time between the date of creation and the "due-date" to set a new date based on the percentage of time between the two. The use picks a priority integer ranging from 1 to 5 (low to high priority). Each level corresponds to a specific meaning; 1 - Unimportant, 2 - Semi Important, 3 - Important, 4 - Very Important, 5 - Crucial. The higher the priority level the sooner the initial alert of the reminder will be. Upon saving the Reminder, the time (or number of days and hours) between the time of creation and the deadline is computed. Based on the priority level and the amount of time between the two dates, we construct an amount of time that signifies when the user should be alerted. That amount of time is incremented into a valid date and time and the notification is then set for that time. 
+
+
+\begin{figure}[h]
+\includegraphics[width=15cm]{Priority.png}
+\centering
+\caption{Priority Algorithm calculation example.}
+\end{figure}
+
+\subsection{JSON Object and Parser - Joel Wilhelm}
+In order to take useful data and store it in the Google Drive folder, a method was needed in order to send and receive the necessary information. The JSON data structure was chosen, as it was a good way to both send and receive information in a string based format. In order for this to work properly, a JSON object was created. This object had fields that contained each important piece of information for a particular notification. It also had a constructor that would take all the information from that object, and turn it into a JSON string. This string is what will be stored inside of the database.
+
+In order to use the data stored in the database, a parser was needed. This parser will take the string from the database, and parse through it, creating a new JSON object, whose fields are the values stored by the string constructor. This object is then passed back to the application, who can now use the information in the way it was intended. 
+
+This JSON class allows the ability to save notifications, and thusly, is vital to the success of the application. 
+
 
 \subsection{Google Drive Syncing - Cody Jones}
-After considering between using Firebase by Google, we decided to use the Google Drive Android API to store the users data across their android devices. We felt that security and privacy were crucial for Reminders, using the users personal drive space provided the most security. Alsom, being an android application, we know that all users have a Google Account already. The user should only have to login to their account to view entries that they have previously made. Inside the users Google Drive space, Prioritize will take advantage of the application data folder, which is unaccessible to anybody except Prioritize. Inside the drive space there is a Reminder folder. This folder will hold all of the JSON representations of the reminders saved in the SQLite Database. When the GDAA here's a change in this folder via the "Change Subscription Listener" which is implemented on it, the device will wake up, parse through the files and add any new entries onto the device and set the notifications accordingly. For handling deletions, the app will again hear a change in the Reminder folder, and will check it's corresponding device folder for any Reminders that need to be deleted. When a device deletes a reminder, it sends a tell to each of the other device folders in the drive space to delete that file as well. 
+After considering between using Firebase by Google, we decided to use the Google Drive Android API to store the user's data across their android devices. We felt that security and privacy were crucial for Reminders, using the user's personal drive space provided the most security. Also, being an android application, we know that all users have a Google Account already. The user should only have to log in to their account to view entries that they have previously made. Inside the user's Google Drive space, Prioritize will take advantage of the application data folder, which is inaccessible to anybody except Prioritize. Inside the drive space there is a Reminder folder. This folder will hold all of the JSON representations of the reminders saved in the SQLite Database. When the GDAA hears a change in this folder via the "Change Subscription Listener" which is implemented on it, the device will wake up, parse through the files and add any new entries onto the device and set the notifications accordingly. For handling deletions, the app will again hear a change in the Reminder folder, and will check it's corresponding device folder for any Reminders that need to be deleted. When a device deletes a reminder, it sends a tell to each of the other device folders in the drive space to delete that file as well. This can be seen in Figure 3, as well as later in the  report as well.
 
-\subsection{GUI - Shahrukh Rehnman}
-Similar to the Home Activity, the GUI encompasses everything the user sees and interacts with. It provides the user with a menu, buttons, options to create a new Reminder, edit old Reminders, a calendar to view when Reminders are due, and so much more. In short, it is the face of Prioritize. Shown in Figure 2 is a visual representation of the GUI dataflow. This is Shahrukh's responsibility.
+\begin{figure}[h]
+\includegraphics[width=15cm]{SystemSync.png}
+\centering
+\caption{An overview of Synching across multiple devices.}
+\end{figure}
+
+
+
+
+
+
+\subsection{GUI - Shahrukh Rehman}
+Similar to the Home Activity, the GUI encompasses everything the user sees and interacts with. It provides the user with a menu, buttons, options to create a new Reminder, edit old Reminders, a calendar to view when Reminders are due, and so much more. In short, it is the face of Prioritize. Shown in Figure 4 is a visual representation of the GUI dataflow. This is Shahrukh's responsibility.
 
 \begin{figure}[h]
 \includegraphics[width=8cm]{GuiSubsystem.png}
@@ -93,7 +119,7 @@ Similar to the Home Activity, the GUI encompasses everything the user sees and i
 \end{figure}
 
 \subsection{Adding a Reminder - Shahrukh Rehman}
-The Add Reminder activity is a system for the user to create a Reminder to be added to the Reminder database. Has field for Reminder description, date picker, time picker, repeatable check, alert/alarm switch, and the option for ignoring priority system. Shown in Figure 3 is a visual representation of the process of creating a new Reminder. When a Reminder is saved it is sent to the local SQLite databse as well as the Google Drive space. 
+The Add Reminder activity is a system for the user to create a Reminder to be added to the Reminder database. Has field for Reminder description, date picker, time picker, repeatable check, alert/alarm switch, and the option for ignoring priority system. Shown in Figure 5 is a visual representation of the process of creating a new Reminder. When a Reminder is saved it is sent to the local SQLite databse as well as the Google Drive space. 
 
 \begin{figure}[h]
 \includegraphics[width=8cm]{ReminderCreation.png}
@@ -101,15 +127,9 @@ The Add Reminder activity is a system for the user to create a Reminder to be ad
 \caption{A visual representation of Reminder Creation}
 \end{figure}
 
-\section{Timeline}
+\subsection{Documentation - Joel Wilhelm}
+All documentation for Prioritize was done, or overseen by Joel. He was responsible for creating and overseeing PowerPoint presentations, formal reports and writeups, posters, and user manuals. 
 
-This project followed, more or less, the Waterfall software design and engineering schema. Lots of documentation was required, planning, preparation, and revisions were necessary in this project. An agile methodology was not present in this project, which is visible in the approximated timeline, Figure 4.
-
-\begin{figure}[h]
-\includegraphics[width=15cm]{Timeline.png}
-\centering
-\caption{A basic timeine of our project, as of March 30th, 2017.}
-\end{figure}
 
 
 \section{Risk Factors}
@@ -190,7 +210,7 @@ We will be using an SQLite database to store all Reminders with all of the Remin
 \subsection{Reminder Creation}
 When reminders are created the data must be saved in the SQLite Database on the device it was created on. It must also be saved in JSON format on the Google Drive Application Data Folder with the Google Drive Android API (GDAA). The GDAA allows access to a folder that is accessible by the app at all times, offline and online. It provides syncing mechanisms for the app and syncs with the Google Drive Application Data Folder on the online cloud whenever there is a connection. It connects to the users personal Drive and uses their data. The diagram examples a situation where Device A and Device C are connected to the internet at the same time. A makes a reminder and C syncs the data to itself. B is offline but the user created a reminder on that device as well. Eventually, once Device B connects to the internet, the to Application Data Folders will sync, and devices A and C will receive the data made by B, and Device B will sync the data created by A.
 
-This can be seen in Figure 5.
+This can be seen in Figure 6.
 
 \begin{figure}[h]
 \includegraphics[width=15cm]{DataflowA.png}
@@ -202,10 +222,10 @@ This can be seen in Figure 5.
 \subsection{Reminder Deletion}
 When Reminders are deleted, the device that proceeded with the deletion will delete the reminder from its SQLite Database and from the Application Data Folder, and send tells to the other devices folder telling them to delete the reminders from the local databases. They are told individually to the deletion tells from adding up, any device that is keeping up with deletions more frequently shouldn’t be hindered into performing more operations because another device is connected less frequently. When a device receives and performs a delete, the tell that it received from its Application Data Folder is deleted after the operations have been completed. In the figure, Device B is offline and doing nothing, Device A is deleting Reminder A1 and Device C is syncing with the deletion initiated by Device A.
 
-This can be seen in Figure 6.
+This can be seen in Figure 7.
 
 \begin{figure}[h]
-\includegraphics[width=15cm]{DataflowB.png}
+\includegraphics[width=12cm]{DataflowB.png}
 \centering
 \caption{A basic visual representation of Reminder Creation.}
 \end{figure}
@@ -213,29 +233,22 @@ This can be seen in Figure 6.
 
 \section{Design and Controls}
 
-Following, in Figure 7 and Figure 8, are early screenshots of what the Prioritize App's User Interface looked like. It has changed since then, and more pictures will be provided later on.
+Following, in Figure 8 and Figure 9, are screenshots of what the Prioritize Application's User Interface look like. Figure 8 shows the list of reminders currently active, and Figure 9 shows the Date Picker activity.
 
 \begin{figure}[h]
-\includegraphics[width=5cm]{ISscreen1.png}
+\includegraphics[width=5cm]{ListofNotifications.png}
 \centering
-\caption{A first appearance of the Prioritize App. Has changed since this iteration.}
+\caption{A listing of all the current Notifications the user has in store.}
 \end{figure}
 
 
 \begin{figure}[h]
-\includegraphics[width=5cm]{ISscreen2.png}
+\includegraphics[width=5cm]{calendar.png}
 \centering
-\caption{A first appearance of the Prioritize App. Has changed since this iteration.}
+\caption{Date Picker. This screen allows the user to pick when their event is due.}
 \end{figure}
 
-\section{Responsibilities and Accomplishments}
-Joel Wilhelm was responsible for coding the JSON object parser and creator and its following iterations, as well as helping Cody with the Priority Algorithm. He also was responsible for making sure all the documentation was finished, and was of good quality. He is also responsible for helping test various code. The JSON file was written in Java, and tested for correctness in Java. The Priority algorithm was written in Java as well.
 
-Cody Jones was responsible for working on the SQlite Database, the Priority Algorithm with help from Joel, and syncing the data with the Google Drive API. The API requires implementing a Google login for the user Google account, which is already on the Android device. The login is generated into an object, GoogleAPIClient, and persists through the apps activities. Reminders are all saved into a single folder that has 'Subscription' on it such that if the folder contents are changed in any way, a task can be performed in that folder, such as finding all files that have been added since the last sync date (which is saved on device). On opening the app, a sync was forced through the requestSync API call, just in case the subscription has any delay on it.
-
-Shahrukh Rehman was responsible for the Front-End of the application. He is also integrating all of the different sections of the code, and tying everything together.
-
-Wajahat Iqbal was responsible for making the Notification/Alarm object. This was written in Java.
 
 \section{Testing}
 
@@ -272,14 +285,7 @@ One large requirement of the application is that it is quick and easy to use, an
 
 
 
-Prioritize would not take much training on the part of the user. It is relatively simple by design, simplicity was the name of the game from the beginning. It was required to be simple to use, so that users would not get bogged down by trying to understand how to use the application.
-
-The most complicated thing the users must do is download and install the application. Once this has been accomplished, they open the app, sign into a Google account, and can begin using the app. Perhaps the buttons could be explained in the user manual, however, the app was designed to be self-explanatory from the beginning of the design process, up. 
-
-An initial explanation of the Priority Algorithm should be explained as well, so that users new to the application would understand easily.
-
-Otherwise, the user should be able to understand the application without trouble.
-
+Please see the User Manual for more information on training, and use of Prioritize.
 
 \newpage
 
