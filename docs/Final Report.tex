@@ -70,8 +70,11 @@ As shown in Fig. 1, a brief overview of the system is shown. The Reminder Databa
 \subsection{Home Activity - Shahrukh Rehman}
 The Home Activity is a fragment system for activity to display the current list of reminders on one slide. Swiping right reveals a calendar with reminders marked on dates. Clicking the "Add" button will prompt the user to create a new Reminder. 
 
-\subsection{Notifications - Wajahat Iqbal}
+\subsection{Notifications/Alarm Service - Wajahat Iqbal}
 The notifications portion of Prioritize reminds the user of the task depending on the priority set by the user. This happens through sending a notification via an alert or an alarm.  Notifications will offer Snooze, Remind Me Later, and Stop Reminding Me options. 
+
+\subsection{Date/Time/Priority Picker - Wajahat Iqbal}
+Date picker allows the user to select upto 7 dates. And time picker allows the user to select either one time for all dates or different time for seven different dates. Priority seek bar allows the user to select the level of priority he/she wants to assign to the alarm. 
 
 \subsection{SQLite Database - Cody Jones}
 The SQLite Database manages the user's reminders. The database contains a single table, called Reminder. This database is synced with the cloud so that the user's other Android devices can share all of the same information. Because we are dealing with Reminders as a single entry we opted to avoid using standard SQL databse normalization. All information regarding the Reminder is stored in this local database. 
