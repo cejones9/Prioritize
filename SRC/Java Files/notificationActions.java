@@ -130,7 +130,7 @@ public class notificationActions extends IntentService  {
         Calendar cal = Calendar.getInstance();
         Calendar current = Calendar.getInstance();
         String month = "" + c.getString(c.getColumnIndex("DueDate1")).charAt(4) + c.getString(c.getColumnIndex("DueDate1")).charAt(5);
-        String day =  "" + c.getString(c.getColumnIndex("DueDate1")).charAt(6) + c.getString(c.getColumnIndex("DueDate1")).charAt(6);
+        String day =  "" + c.getString(c.getColumnIndex("DueDate1")).charAt(6) + c.getString(c.getColumnIndex("DueDate1")).charAt(7);
         String year = "" + c.getString(c.getColumnIndex("DueDate1")).charAt(0) + c.getString(c.getColumnIndex("DueDate1")).charAt(1) +
                 c.getString(c.getColumnIndex("DueDate1")).charAt(2) + c.getString(c.getColumnIndex("DueDate1")).charAt(3);
         String hour = "" + c.getString(c.getColumnIndex("DueTime1")).charAt(0) + c.getString(c.getColumnIndex("DueTime1")).charAt(1);
@@ -246,7 +246,7 @@ public class notificationActions extends IntentService  {
             sqlToJSON(RID);
         }
         else if (repeatNumber == 4){ // year, we're just gonna increment year, no point in preventing several notifications.
-            cal.set(Integer.parseInt(year), Integer.parseInt(month)-1, Integer.parseInt(day), Integer.parseInt(hour), Integer.parseInt(minute));
+            cal.set(Integer.parseInt(year)+1, Integer.parseInt(month)-1, Integer.parseInt(day), Integer.parseInt(hour), Integer.parseInt(minute));
             if (onTime == 1){
                 long time = cal.getTimeInMillis();
                 updateCalc(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE));
