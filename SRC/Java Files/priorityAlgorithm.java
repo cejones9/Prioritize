@@ -280,8 +280,16 @@ public class priorityAlgorithm {
         while(hours!=0){
             currentHour +=1;
             hours-=1;
-            if (currentHour == 24)
+            if (currentHour == 24){
+                currentDayOfMonth +=1;
+                if (currentDayOfMonth > daysInMonth(currentMonth)){
+                    currentDayOfMonth=1;
+                    currentMonth +=1;
+                    if (currentMonth ==13)
+                        currentMonth =1;
+                }
                 currentHour =0;
+            }
         }
         while(minutes!=0){
             currentMinute +=1;
